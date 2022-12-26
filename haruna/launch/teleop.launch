@@ -1,0 +1,30 @@
+<launch>
+  <arg name="gamepad" default="ps5"/>
+  <node name="joy_node" pkg="joy" type="joy_node">
+    <param name="deadzone" value="0.2"/>
+    <param name="autorepeat_rate" value="20"/>
+  </node>
+  <node name="teleop_node" pkg="teleop_twist_joy" type="teleop_node">
+    <rosparam>
+      enable_button: 5
+      enable_turbo_button: 4
+      axis_linear:
+        x: 1
+      axis_angular:
+        #yaw: 2
+        yaw: 0
+      scale_linear:
+        x: 0.5
+      scale_linear_turbo:
+        x: 1.0
+      scale_angular:
+        yaw: 1.0
+      scale_angular_turbo:
+        yaw: 2.0
+    </rosparam>
+    <rosparam if="$(eval gamepad=='ps5')">
+      enable_button: 7
+      enable_turbo_button: 6
+    </rosparam>
+  </node>
+</launch>

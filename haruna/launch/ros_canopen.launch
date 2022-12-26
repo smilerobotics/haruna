@@ -1,0 +1,17 @@
+<launch>
+  <param name="dummy" command="cansend can0 77F#7F"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro $(find haruna)/urdf/test.urdf"/>
+
+  <node name="canopen_motor_node" pkg="canopen_motor_node" type="canopen_motor_node" output="screen" clear_params="true" launch-prefix="" respawn="false">
+    <rosparam command="load" file="$(find haruna)/config/canopen/bus.yaml"/>
+    <rosparam command="load" file="$(find haruna)/config/canopen/nodes.yaml"/>
+    <remap from="left_wheel_motor_30D1sub1" to="left_wheel_motor_current"/>
+    <remap from="right_wheel_motor_30D1sub1" to="right_wheel_motor_current"/>
+  </node>
+  <node name="ros_canopen_driver_init" pkg="rosservice" type="rosservice" args="call --wait /driver/init"/>
+
+  <rosparam command="load" file="$(find haruna)/config/ros_control.yaml"/>
+
+  <node name="controller_starter" pkg="controller_manager" type="controller_manager" args="spawn joint_state_controller left_wheel_motor_velocity_controller right_wheel_motor_velocity_controller" output="screen"/>
+</launch>

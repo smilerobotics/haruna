@@ -1,0 +1,30 @@
+defaults:
+  eds_pkg: haruna
+  pos_to_device: "rint(pos*(4096*4)/(2*pi))" # rad -> qc(pulse)
+  pos_from_device: "obj6064*(2*pi)/(4096*4)" # qc(pulse) -> rad
+  vel_to_device: "rint(vel*60/(2*pi))" # rad/s -> rpm
+  vel_from_device: "obj606C*(2*pi)/60" # rpm -> rad/s
+  eff_to_device: "eff/8.0*1000" # Nm -> per thousand of `Motor rated torque`
+  eff_from_device: "obj30D2sub1*8.0/1000" # per thousand of `Motor rated torque` -> Nm
+  motor_layer:
+    stop_on_internal_limit: false
+  #dcf_overlay:
+  #  "6083": "20000" # Profile acceleration [rpm/s]
+  #  "6084": "20000" # Profile deceleration [rpm/s]
+  #   "3001sub2": "30000" # Output current limit [mA]
+  #   "607F": "4020" # Max profile velocity [rpm]
+  #   "60C5": "100000" # Max acceleration [rpm/s]
+
+nodes:
+  left_wheel_motor:
+    id: 1
+    joint: left_wheel_joint
+    eds_file: "dcf//node1.dcf"
+    publish:
+    - "30D1sub1!" # Current actual value averaged
+  right_wheel_motor:
+    id: 2
+    joint: right_wheel_joint
+    eds_file: "dcf/node2.dcf"
+    publish:
+    - "30D1sub1!" # Current actual value averaged

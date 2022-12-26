@@ -1,0 +1,8 @@
+<launch>
+  <include file="$(dirname)/ros_canopen.launch"/>
+  <include file="$(dirname)/teleop.launch"/>
+
+  <node name="base_controller" pkg="haruna" type="base_controller.py" output="screen"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+</launch>

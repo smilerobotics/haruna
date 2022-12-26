@@ -1,0 +1,5 @@
+- git:
+    local-name: ros_canopen
+    uri: https://github.com/smilerobotics/ros_canopen.git
+    version: melodic-devel
+

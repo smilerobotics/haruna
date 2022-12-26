@@ -1,0 +1,13 @@
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 200
+
+left_wheel_motor_velocity_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: left_wheel_joint
+  required_drive_mode: 3
+
+right_wheel_motor_velocity_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: right_wheel_joint
+  required_drive_mode: 3
