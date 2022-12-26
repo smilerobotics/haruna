@@ -10,8 +10,8 @@
 
 Prepare either of the following
 
-* [USB-to-CAN V2](https://www.ixxat.com/ja/products/products-industrial/can-interfaces/usb/usb-to-can-v2?ordercode=1.01.0281.12001) (Ixxat)
-* [2-CH CAN HAT](https://www.waveshare.com/wiki/2-CH_CAN_HAT) (Waveshare)
+* [USB-to-CAN V2 (Ixxat)](./docs/ixxat.md)
+* [2-CH CAN HAT (Waveshare)](./docs/can_hat.md)
 * etc
 
 ### Joy Controller
