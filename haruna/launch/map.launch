@@ -4,7 +4,7 @@
 
   <include file="$(find rplidar_ros)/launch/rplidar_s1.launch"/>
 
-  <node name="base_controller" pkg="haruna" type="base_controller.py" output="screen"/>
+  <node name="base_controller" pkg="haruna" type="base_controller_for_map.py" output="screen"/>
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 
