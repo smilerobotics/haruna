@@ -1,5 +1,6 @@
 joint_state_controller:
   type: joint_state_controller/JointStateController
+  #publish_rate: 200
   publish_rate: 50
 
 left_wheel_motor_velocity_controller:

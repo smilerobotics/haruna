@@ -34,6 +34,26 @@ DualSense or something
 
 ## Run
 
-```
+```bash
 $ roslaunch haruna main.launch
 ```
+
+### Run to create a map
+
+Please set `ROS_MASTER_URI` and `ROS_IP`.
+
+#### Robot client (Raspberry Pi)
+
+```bash
+roslaunch haruna navigation.launch
+```
+
+#### Robot master (Laptop or Desktop or else)
+
+```bash
+roslaunch haruna navigation_host.launch
+```
+
+### Launch file
+
+The description of launch file is [here](./docs/launch.md)

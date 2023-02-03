@@ -17,10 +17,10 @@ TOPIC_NAME_JOINT_STATES = '/joint_states'
 PARAM_NAME_RATE = '~rate'
 DEFAULT_RATE = 50
 
-ACCELERATION_LIMIT_LINEAR = 3.0
-ACCELERATION_LIMIT_ANGULAR = 6.0
+ACCELERATION_LIMIT_LINEAR = 2.0
+ACCELERATION_LIMIT_ANGULAR = 4.0
 
-TREAD_WIDTH = 0.3511
+TREAD_WIDTH = 0.3441
 WHEEL_RADIUS = 0.17 / 2.0
 
 class BaseController:
@@ -69,7 +69,7 @@ class BaseController:
 class Odometry:
     def __init__(self):
         self._tf_bradcaster = tf2_ros.TransformBroadcaster()
-        self._tf_frame_id = 'map'
+        self._tf_frame_id = 'odom'
         self._tf_child_frame_id = 'base_link'
 
         self._dist_left = 0.0

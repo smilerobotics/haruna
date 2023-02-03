@@ -1,0 +1,6 @@
+GlobalPlanner:
+  orientation_mode: 1
+  allow_unknown: false
+  default_tolerance: 0.1
+  use_dijkstra: false     # true=dijkstra false=A*
+  use_grid_path: true   # A* need this=true
