@@ -5,6 +5,7 @@ bus:
   # driver_plugin: can::SocketCANInterface
   # master_allocator: canopen::SimpleMaster::Allocator
 sync:
+  #interval_ms: 5 # set to 0 to disable sync
   interval_ms: 20 # set to 0 to disable sync
   # update_ms: <interval_ms> #update interval of control loop, must be set explicitly if sync is disabled
   overflow: 0 # overflow sync counter at value or do not set it (0, default)
