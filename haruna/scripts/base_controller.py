@@ -17,10 +17,16 @@ TOPIC_NAME_JOINT_STATES = '/joint_states'
 PARAM_NAME_RATE = '~rate'
 DEFAULT_RATE = 50
 
-ACCELERATION_LIMIT_LINEAR = 3.0
-ACCELERATION_LIMIT_ANGULAR = 6.0
+# ACCELERATION_LIMIT_LINEAR = 3.0
+# ACCELERATION_LIMIT_ANGULAR = 6.0
 
-TREAD_WIDTH = 0.3511
+ACCELERATION_LIMIT_LINEAR = 1.0
+ACCELERATION_LIMIT_ANGULAR = 2.0
+
+VELOCITY_LIMIT_LINEAR = 0.4
+VELOCITY_LIMIT_ANGULAR = 0.8
+
+TREAD_WIDTH = 0.3441
 WHEEL_RADIUS = 0.17 / 2.0
 
 class BaseController:
@@ -37,6 +43,15 @@ class BaseController:
         self._vel_linear = vel_linear
         self._vel_angular = vel_angular
         self._velocity_updated_timestamp = rospy.Time.now()
+
+        if self._vel_linear > VELOCITY_LIMIT_LINEAR:
+            self._vel_linear = VELOCITY_LIMIT_LINEAR
+        elif self._vel_linear < -VELOCITY_LIMIT_LINEAR:
+            self._vel_linear = -VELOCITY_LIMIT_LINEAR
+        if self._vel_angular > VELOCITY_LIMIT_ANGULAR:
+            self._vel_angular = VELOCITY_LIMIT_ANGULAR
+        elif self._vel_angular < -VELOCITY_LIMIT_ANGULAR:
+            self._vel_angular = -VELOCITY_LIMIT_ANGULAR
 
     def proc(self, dt: float):
         vel_linear = self._vel_linear
