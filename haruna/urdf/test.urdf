@@ -56,9 +56,6 @@
   <joint name="body_to_laser" type="fixed">
     <parent link="body"/>
     <child link="laser"/>
-    <!-- RPLiDAR -->
-    <origin rpy="0 3.14 0" xyz="0.22 0 0"/>
-    <!-- YDLiDAR -->
-    <!--<origin rpy="0 0 1.57" xyz="0.22 0 0"/>-->
+    <origin rpy="0 3.14 0" xyz="0.22 0 0.18"/>
   </joint>
 </robot>

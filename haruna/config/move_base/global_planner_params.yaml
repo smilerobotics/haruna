@@ -1,6 +1,6 @@
 GlobalPlanner:
-  orientation_mode: 7 # Automatic
+  orientation_mode: 7    # Automatic
   allow_unknown: false
   default_tolerance: 0.1
-  use_dijkstra: true # true=dijkstra false=A*
-  use_grid_path: false # A* need this=true
+  use_dijkstra: true     # true=dijkstra false=A*
+  use_grid_path: false   # A* need this=true

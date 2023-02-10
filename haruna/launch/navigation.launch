@@ -1,0 +1,36 @@
+<launch>
+  <include file="$(dirname)/ros_canopen.launch"/>
+  <include file="$(dirname)/teleop.launch"/>
+
+  <include file="$(find rplidar_ros)/launch/rplidar_s1.launch"/>
+
+  <node name="base_controller" pkg="haruna" type="base_controller.py" output="screen"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <!-- Laser filter -->
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
+    <rosparam command="load" file="$(dirname)/../config/laser_filter.yaml" />
+  </node>
+
+  <!-- AMCL -->
+  <node pkg="amcl" type="amcl" name="amcl" clear_params="true">
+    <rosparam command="load" file="$(dirname)/../config/amcl.yaml" />
+    <remap from="scan" to="scan_filtered"/>
+  </node>
+
+  <!-- Map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(dirname)/../maps/map.yaml my_map_resolution">
+    <param name="frame_id" value="map"/>
+  </node>
+
+  <!-- MoveBase -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(dirname)/../config/move_base/base_local_planner_params.yaml" command="load"/>
+    <rosparam file="$(dirname)/../config/move_base/move_base_params.yaml" command="load"/>
+    <rosparam file="$(dirname)/../config/move_base/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(dirname)/../config/move_base/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+    <rosparam file="$(dirname)/../config/move_base/local_costmap_params.yaml" command="load"/>
+    <rosparam file="$(dirname)/../config/move_base/global_costmap_params.yaml" command="load"/>
+  </node>
+</launch>

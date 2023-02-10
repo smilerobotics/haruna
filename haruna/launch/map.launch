@@ -3,7 +3,6 @@
   <include file="$(dirname)/teleop.launch"/>
 
   <include file="$(find rplidar_ros)/launch/rplidar_s1.launch"/>
-  <!--<include file="$(find ydlidar_ros_driver)/launch/Tmini.launch"/>-->
 
   <node name="base_controller" pkg="haruna" type="base_controller_for_map.py" output="screen"/>
 
