@@ -56,7 +56,9 @@
   <joint name="body_to_laser" type="fixed">
     <parent link="body"/>
     <child link="laser"/>
-    <!-- TODO: Set laser transform collectly -->
-    <origin rpy="0 3.14 0" xyz="0.24 0 0"/>
+    <!-- RPLiDAR -->
+    <origin rpy="0 3.14 0" xyz="0.22 0 0"/>
+    <!-- YDLiDAR -->
+    <!--<origin rpy="0 0 1.57" xyz="0.22 0 0"/>-->
   </joint>
 </robot>
