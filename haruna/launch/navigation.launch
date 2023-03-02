@@ -1,22 +1,27 @@
 <launch>
-  <include file="$(dirname)/ros_canopen.launch"/>
-  <include file="$(dirname)/teleop.launch"/>
+  <arg name="vel_limit_linear" default="inf"/>
+  <arg name="vel_limit_angular" default="inf"/>
+  <arg name="acc_limit_linear" default="2.0"/>
+  <arg name="acc_limit_angular" default="4.0"/>
 
+  <!-- Base controller -->
+  <include file="$(dirname)/main.launch">
+    <arg name="vel_limit_linear" value="$(arg vel_limit_linear)"/>
+    <arg name="vel_limit_angular" value="$(arg vel_limit_angular)"/>
+    <arg name="acc_limit_linear" value="$(arg acc_limit_linear)"/>
+    <arg name="acc_limit_angular" value="$(arg acc_limit_angular)"/>
+  </include>
+
+  <!-- RPLiDAR -->
   <include file="$(find rplidar_ros)/launch/rplidar_s1.launch"/>
-
-  <node name="base_controller" pkg="haruna" type="base_controller.py" output="screen">
-    <param name="vel_limit_linear" value="inf"/>
-    <param name="vel_limit_angular" value="inf"/>
-    <param name="acc_limit_linear" value="2.0"/>
-    <param name="acc_limit_angular" value="4.0"/>
-  </node>
-
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 
   <!-- Laser filter -->
   <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
     <rosparam command="load" file="$(dirname)/../config/laser_filter.yaml" />
   </node>
+
+  <!-- MoveBase -->
+  <include file="$(dirname)/move_base.launch"/>
 
   <!-- AMCL -->
   <node pkg="amcl" type="amcl" name="amcl" clear_params="true">
@@ -27,15 +32,5 @@
   <!-- Map server -->
   <node name="map_server" pkg="map_server" type="map_server" args="$(dirname)/../maps/map.yaml">
     <param name="frame_id" value="map"/>
-  </node>
-
-  <!-- MoveBase -->
-  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-    <rosparam file="$(dirname)/../config/move_base/base_local_planner_params.yaml" command="load"/>
-    <rosparam file="$(dirname)/../config/move_base/move_base_params.yaml" command="load"/>
-    <rosparam file="$(dirname)/../config/move_base/costmap_common_params.yaml" command="load" ns="global_costmap"/>
-    <rosparam file="$(dirname)/../config/move_base/costmap_common_params.yaml" command="load" ns="local_costmap"/>
-    <rosparam file="$(dirname)/../config/move_base/local_costmap_params.yaml" command="load"/>
-    <rosparam file="$(dirname)/../config/move_base/global_costmap_params.yaml" command="load"/>
   </node>
 </launch>
