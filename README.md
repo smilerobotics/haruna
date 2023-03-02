@@ -51,7 +51,7 @@ roslaunch haruna mapping_auto.launch
 #### Robot master (Laptop or Desktop or else)
 
 ```bash
-roslaunch haruna mapping_auto_host.launch
+roslaunch haruna mapping_auto_rviz.launch
 ```
 
 ### Launch file
