@@ -1,12 +1,17 @@
 <launch>
+  <arg name="vel_limit_linear" default="inf"/>
+  <arg name="vel_limit_angular" default="inf"/>
+  <arg name="acc_limit_linear" default="2.0"/>
+  <arg name="acc_limit_angular" default="4.0"/>
+
   <include file="$(dirname)/ros_canopen.launch"/>
   <include file="$(dirname)/teleop.launch"/>
 
   <node name="base_controller" pkg="haruna" type="base_controller.py" output="screen">
-    <param name="vel_limit_linear" value="inf"/>
-    <param name="vel_limit_angular" value="inf"/>
-    <param name="acc_limit_linear" value="2.0"/>
-    <param name="acc_limit_angular" value="4.0"/>
+    <param name="vel_limit_linear" value="$(arg vel_limit_linear)"/>
+    <param name="vel_limit_angular" value="$(arg vel_limit_angular)"/>
+    <param name="acc_limit_linear" value="$(arg acc_limit_linear)"/>
+    <param name="acc_limit_angular" value="$(arg acc_limit_angular)"/>
   </node>
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
