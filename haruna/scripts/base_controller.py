@@ -17,14 +17,23 @@ TOPIC_NAME_JOINT_STATES = '/joint_states'
 PARAM_NAME_RATE = '~rate'
 DEFAULT_RATE = 50
 
-ACCELERATION_LIMIT_LINEAR = 2.0
-ACCELERATION_LIMIT_ANGULAR = 4.0
+PARAM_NAME_VEL_LIMIT_LINEAR = '~vel_limit_linear'
+DEFAULT_VEL_LIMIT_LINEAR = float("inf")
+
+PARAM_NAME_VEL_LIMIT_ANGULAR = '~vel_limit_angular'
+DEFAULT_VEL_LIMIT_ANGULAR = float("inf")
+
+PARAM_NAME_ACC_LIMIT_LINEAR = '~acc_limit_linear'
+DEFAULT_ACC_LIMIT_LINEAR = 2.0
+
+PARAM_NAME_ACC_LIMIT_ANGULAR = '~acc_limit_angular'
+DEFAULT_ACC_LIMIT_ANGULAR = 4.0
 
 TREAD_WIDTH = 0.3441
 WHEEL_RADIUS = 0.17 / 2.0
 
 class BaseController:
-    def __init__(self):
+    def __init__(self, lim_vel_linear, lim_vel_angular, lim_acc_linear, lim_acc_angular):
         self._vel_linear = 0.0
         self._vel_angular = 0.0
         self._last_vel_linear = 0.0
@@ -32,10 +41,26 @@ class BaseController:
         self._velocity_updated_timestamp = rospy.Time()
         self._left_wheel_motor_velocity_publisher = rospy.Publisher('/left_wheel_motor_velocity_controller/command', Float64, queue_size=1)
         self._right_wheel_motor_velocity_publisher = rospy.Publisher('/right_wheel_motor_velocity_controller/command', Float64, queue_size=1)
+        self._lim_vel_linear = lim_vel_linear
+        self._lim_vel_angular = lim_vel_angular
+        self._lim_acc_linear = lim_acc_linear
+        self._lim_acc_angular = lim_acc_angular
 
     def update_velocity(self, vel_linear: float, vel_angular: float):
-        self._vel_linear = vel_linear
-        self._vel_angular = vel_angular
+        if vel_linear > self._lim_vel_linear:
+            self._vel_linear = self._lim_vel_linear
+        elif vel_linear < -self._lim_vel_linear:
+            self._vel_linear = -self._lim_vel_linear
+        else:
+            self._vel_linear = vel_linear
+
+        if vel_angular > self._lim_vel_angular:
+            self._vel_angular = self._lim_vel_angular
+        elif vel_angular < -self._lim_vel_angular:
+            self._vel_angular = -self._lim_vel_angular
+        else:
+            self._vel_angular = vel_angular
+
         self._velocity_updated_timestamp = rospy.Time.now()
 
     def proc(self, dt: float):
@@ -48,14 +73,14 @@ class BaseController:
             vel_linear = 0.0
             vel_angular = 0.0
 
-        if vel_linear > self._last_vel_linear + ACCELERATION_LIMIT_LINEAR * dt:
-            vel_linear = self._last_vel_linear + ACCELERATION_LIMIT_LINEAR * dt
-        elif vel_linear < self._last_vel_linear - ACCELERATION_LIMIT_LINEAR * dt:
-            vel_linear = self._last_vel_linear - ACCELERATION_LIMIT_LINEAR * dt
-        if vel_angular > self._last_vel_angular + ACCELERATION_LIMIT_ANGULAR * dt:
-            vel_angular = self._last_vel_angular + ACCELERATION_LIMIT_ANGULAR * dt
-        elif vel_angular < self._last_vel_angular - ACCELERATION_LIMIT_ANGULAR * dt:
-            vel_angular = self._last_vel_angular - ACCELERATION_LIMIT_ANGULAR * dt
+        if vel_linear > self._last_vel_linear + self._lim_acc_linear * dt:
+            vel_linear = self._last_vel_linear + self._lim_acc_linear * dt
+        elif vel_linear < self._last_vel_linear - self._lim_acc_linear * dt:
+            vel_linear = self._last_vel_linear - self._lim_acc_linear * dt
+        if vel_angular > self._last_vel_angular + self._lim_acc_angular * dt:
+            vel_angular = self._last_vel_angular + self._lim_acc_angular * dt
+        elif vel_angular < self._last_vel_angular - self._lim_acc_angular * dt:
+            vel_angular = self._last_vel_angular - self._lim_acc_angular * dt
 
         vel_left = vel_linear - vel_angular * TREAD_WIDTH / 2;
         vel_right = vel_linear + vel_angular * TREAD_WIDTH / 2;
@@ -112,7 +137,13 @@ if __name__ == '__main__':
 
     rate_hz = float(rospy.get_param(PARAM_NAME_RATE, DEFAULT_RATE))
 
-    base = BaseController()
+    lim_vel_linear = float(rospy.get_param(PARAM_NAME_VEL_LIMIT_LINEAR, DEFAULT_VEL_LIMIT_LINEAR))
+    lim_vel_angular = float(rospy.get_param(PARAM_NAME_VEL_LIMIT_ANGULAR, DEFAULT_VEL_LIMIT_ANGULAR))
+
+    lim_acc_linear = float(rospy.get_param(PARAM_NAME_ACC_LIMIT_LINEAR, DEFAULT_ACC_LIMIT_LINEAR))
+    lim_acc_angular = float(rospy.get_param(PARAM_NAME_ACC_LIMIT_ANGULAR, DEFAULT_ACC_LIMIT_ANGULAR))
+
+    base = BaseController(lim_vel_linear, lim_vel_angular, lim_acc_linear, lim_acc_angular)
     odom = Odometry()
 
     cmd_vel_subscriber = rospy.Subscriber(

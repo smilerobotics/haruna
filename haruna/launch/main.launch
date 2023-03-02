@@ -2,7 +2,12 @@
   <include file="$(dirname)/ros_canopen.launch"/>
   <include file="$(dirname)/teleop.launch"/>
 
-  <node name="base_controller" pkg="haruna" type="base_controller.py" output="screen"/>
+  <node name="base_controller" pkg="haruna" type="base_controller.py" output="screen">
+    <param name="vel_limit_linear" value="inf"/>
+    <param name="vel_limit_angular" value="inf"/>
+    <param name="acc_limit_linear" value="2.0"/>
+    <param name="acc_limit_angular" value="4.0"/>
+  </node>
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 </launch>

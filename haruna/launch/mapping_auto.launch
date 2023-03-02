@@ -4,29 +4,19 @@
 
   <include file="$(find rplidar_ros)/launch/rplidar_s1.launch"/>
 
-  <node name="base_controller" pkg="haruna" type="base_controller.py" output="screen"/>
+  <node name="base_controller" pkg="haruna" type="base_controller.py" output="screen">
+    <param name="vel_limit_linear" value="inf"/>
+    <param name="vel_limit_angular" value="inf"/>
+    <param name="acc_limit_linear" value="2.0"/>
+    <param name="acc_limit_angular" value="4.0"/>
+  </node>
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 
   <!-- Laser filter -->
   <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
-    <rosparam command="load" file="$(dirname)/../config/laser_filter.yaml" />
+    <rosparam command="load" file="$(dirname)/../config/laser_filter.yaml"/>
   </node>
-
-  <!-- AMCL -->
-  <!--
-  <node pkg="amcl" type="amcl" name="amcl" clear_params="true">
-    <rosparam command="load" file="$(dirname)/../config/amcl.yaml" />
-    <remap from="scan" to="scan_filtered"/>
-  </node>
-  -->
-
-  <!-- Map server -->
-  <!--
-  <node name="map_server" pkg="map_server" type="map_server" args="$(dirname)/../maps/map.yaml my_map_resolution">
-    <param name="frame_id" value="map"/>
-  </node>
-  -->
 
   <!-- MoveBase -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
@@ -45,7 +35,6 @@
 
   <node pkg="explore_lite" type="explore" name="explore" output="screen">
     <param name="costmap_topic" value="/map"/>
-    <!-- param name="costmap_updates_topic" value="/move_base/global_costmap/costmap_updates"/-->
     <param name="visualize" value="true"/>
   </node>
 </launch>
