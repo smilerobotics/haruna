@@ -47,19 +47,8 @@ class BaseController:
         self._lim_acc_angular = lim_acc_angular
 
     def update_velocity(self, vel_linear: float, vel_angular: float):
-        if vel_linear > self._lim_vel_linear:
-            self._vel_linear = self._lim_vel_linear
-        elif vel_linear < -self._lim_vel_linear:
-            self._vel_linear = -self._lim_vel_linear
-        else:
-            self._vel_linear = vel_linear
-
-        if vel_angular > self._lim_vel_angular:
-            self._vel_angular = self._lim_vel_angular
-        elif vel_angular < -self._lim_vel_angular:
-            self._vel_angular = -self._lim_vel_angular
-        else:
-            self._vel_angular = vel_angular
+        self._vel_linear = clamp(vel_linear, -self._lim_vel_linear, self._lim_vel_linear)
+        self._vel_angular = clamp(vel_angular, -self._lim_vel_angular, self._lim_vel_angular)
 
         self._velocity_updated_timestamp = rospy.Time.now()
 
@@ -73,14 +62,8 @@ class BaseController:
             vel_linear = 0.0
             vel_angular = 0.0
 
-        if vel_linear > self._last_vel_linear + self._lim_acc_linear * dt:
-            vel_linear = self._last_vel_linear + self._lim_acc_linear * dt
-        elif vel_linear < self._last_vel_linear - self._lim_acc_linear * dt:
-            vel_linear = self._last_vel_linear - self._lim_acc_linear * dt
-        if vel_angular > self._last_vel_angular + self._lim_acc_angular * dt:
-            vel_angular = self._last_vel_angular + self._lim_acc_angular * dt
-        elif vel_angular < self._last_vel_angular - self._lim_acc_angular * dt:
-            vel_angular = self._last_vel_angular - self._lim_acc_angular * dt
+        vel_linear = clamp(vel_linear, self._last_vel_linear - self._lim_acc_linear * dt, self._last_vel_linear + self._lim_acc_linear * dt)
+        vel_angular = clamp(vel_angular, self._last_vel_angular - self._lim_acc_angular * dt, self._last_vel_angular + self._lim_acc_angular * dt)
 
         vel_left = vel_linear - vel_angular * TREAD_WIDTH / 2;
         vel_right = vel_linear + vel_angular * TREAD_WIDTH / 2;
@@ -131,6 +114,8 @@ class Odometry:
         tf.transform.rotation.w = math.cos(self._orientation_yaw / 2)
         self._tf_bradcaster.sendTransform(tf)
 
+def clamp(n, smallest, largest):
+        return max(smallest, min(n, largest))
 
 if __name__ == '__main__':
     rospy.init_node('controller')
