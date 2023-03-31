@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>haruna_navigation</name>
+  <version>0.0.0</version>
+  <description>Haruna navigation package</description>
+  <maintainer email="miyadera@smilerobotics.com">miyadera</maintainer>
+  <license>TODO</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>amcl</exec_depend>
+  <exec_depend>map_server</exec_depend>
+  <exec_depend>navigation</exec_depend>
+  <exec_depend>rplidar_ros</exec_depend>
+  <exec_depend>slam_toolbox</exec_depend>
+  <exec_depend>teb_local_planner</exec_depend>
+</package>
