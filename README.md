@@ -25,8 +25,8 @@ DualSense or something
 ~$ cd catkin_ws
 ~/catkin_ws$ catkin init
 ~/catkin_ws$ cd src
-~/catkin_ws/src$ git clone git@github.com:smilerobotics/haruna_test_bench.git
-~/catkin_ws/src$ vcs import < haruna_test_bench/.rosinstall
+~/catkin_ws/src$ git clone git@github.com:smilerobotics/haruna.git
+~/catkin_ws/src$ vcs import < haruna/.rosinstall
 ~/catkin_ws/src$ rosdep install --from-paths .
 ~/catkin_ws/src$ catkin build
 ~/catkin_ws/src$ source ~/catkin_ws/devel/setup.bash
