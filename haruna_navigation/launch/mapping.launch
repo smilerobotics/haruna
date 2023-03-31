@@ -5,7 +5,7 @@
   <arg name="acc_limit_angular" default="2.0"/>
 
   <!-- Base controller -->
-  <include file="$(dirname)/main.launch">
+  <include file="$(find haruna)/launch/main.launch">
     <arg name="vel_limit_linear" value="$(arg vel_limit_linear)"/>
     <arg name="vel_limit_angular" value="$(arg vel_limit_angular)"/>
     <arg name="acc_limit_linear" value="$(arg acc_limit_linear)"/>
