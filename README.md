@@ -45,13 +45,13 @@ Please set `ROS_MASTER_URI` and `ROS_IP`.
 #### Robot client (Raspberry Pi)
 
 ```bash
-roslaunch haruna mapping_auto.launch
+roslaunch haruna_navigation mapping_auto.launch
 ```
 
 #### Robot master (Laptop or Desktop or else)
 
 ```bash
-roslaunch haruna mapping_auto_rviz.launch
+roslaunch haruna_navigation mapping_auto_rviz.launch
 ```
 
 ### Launch file
