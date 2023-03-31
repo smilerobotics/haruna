@@ -1,4 +1,4 @@
-# haruna_test_bench
+# haruna
 
 ## Prerequirements
 
