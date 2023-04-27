@@ -18,7 +18,7 @@
 | File name                                                                    | Purpose                                                         |
 | ---------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | [navigation.launch](../haruna_navigation/launch/navigation.launch)           | Run the robot in Navigation mode                                |
-| [navigation_rviz.launch](../haruna_navigation/launch/navigation_rviz.launch) | Viualize map, path, robot model or else and set goal in `RViz` |
+| [navigation_rviz.launch](../haruna_navigation/launch/navigation_rviz.launch) | Visualize map, path, robot model or else and set goal in `RViz` |
 
 ## For auto mapping
 
