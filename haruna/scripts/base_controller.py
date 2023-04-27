@@ -76,7 +76,7 @@ class BaseController:
 
 class Odometry:
     def __init__(self):
-        self._tf_bradcaster = tf2_ros.TransformBroadcaster()
+        self._tf_broadcaster = tf2_ros.TransformBroadcaster()
         self._tf_frame_id = 'odom'
         self._tf_child_frame_id = 'base_link'
 
@@ -112,7 +112,7 @@ class Odometry:
         tf.transform.translation.y = self._pos_y
         tf.transform.rotation.z = math.sin(self._orientation_yaw / 2)
         tf.transform.rotation.w = math.cos(self._orientation_yaw / 2)
-        self._tf_bradcaster.sendTransform(tf)
+        self._tf_broadcaster.sendTransform(tf)
 
 def clamp(n, smallest, largest):
         return max(smallest, min(n, largest))
