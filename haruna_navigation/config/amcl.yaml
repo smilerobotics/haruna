@@ -33,7 +33,7 @@ laser_lambda_short: 0.1
 laser_likelihood_max_dist: 2.0
 laser_model_type: likelihood_field
 
-# Odometery model parameters
+# Odometry model parameters
 odom_model_type: diff-corrected
 odom_alpha1: 0.2
 odom_alpha2: 0.2
