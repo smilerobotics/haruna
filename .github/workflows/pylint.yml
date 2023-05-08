@@ -5,6 +5,8 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: docker://ros:noetic-ros-base
     strategy:
       matrix:
         python-version: ["3.8", "3.9", "3.10"]
@@ -20,4 +22,5 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
+        source /opt/ros/noetic/setup.bash
         pylint $(git ls-files '*.py')

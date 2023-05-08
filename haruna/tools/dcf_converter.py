@@ -14,9 +14,9 @@ class PropertyValueFilter:
     def __init__(self, rule):
         self._rule = rule
 
-    def filter(self, property, value):
-        if property in self._rule:
-            return self._rule[property]
+    def filter(self, _property, value):
+        if _property in self._rule:
+            return self._rule[_property]
         else:
             return value
 
