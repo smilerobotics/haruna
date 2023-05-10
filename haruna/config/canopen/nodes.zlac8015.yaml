@@ -1,0 +1,82 @@
+defaults:
+  eds_pkg: haruna
+  eds_file: "eds/ZLAC8015.eds"
+  pos_to_device: "rint(pos*(4096*4)/(2*pi))" # rad -> qc(pulse)
+  pos_from_device: "obj6064*(2*pi)/(4096*4)" # qc(pulse) -> rad
+  vel_to_device: "rint(vel*60/(2*pi))" # rad/s -> rpm
+  vel_from_device: "obj606C*(2*pi)/60/10" # 0.1rpm -> rad/s
+  # EPOS studio estimated torque constant: about 0.37 [Nm/A]
+  eff_to_device: "eff/0.37*1000" # Nm -> mA
+  eff_from_device: "obj6077*0.37/10" # 0.1A -> Nm
+  motor_layer:
+    stop_on_internal_limit: false
+  dcf_overlay:
+    "1400sub2": "1" # RPDO0 Transmission type: synchronous
+    "1401sub2": "1" # RPDO1 Transmission type: synchronous
+    "1402sub2": "1" # RPDO2 Transmission type: synchronous
+    "1403sub2": "1" # RPDO3 Transmission type: synchronous
+    "1800sub2": "1" # TPDO0 Transmission type: synchronous
+    "1801sub2": "1" # TPDO1 Transmission type: synchronous
+    "1802sub2": "1" # TPDO2 Transmission type: synchronous
+    "1803sub2": "1" # TPDO3 Transmission type: synchronous
+    # PDO mapping
+    # RPDO0
+    "1600sub0": "3" # Number of sub-indexes
+    "1600sub1": "0x60400010" # Control word (default)
+    "1600sub2": "0x60600008" # Operating mode
+    "1600sub3": "0x607A0020" # Target position
+    # RPDO1
+    "1601sub0": "3" # Number of sub-indexes
+    "1601sub1": "0x60400010" # Control word
+    "1601sub2": "0x60600008" # Operating mode
+    "1601sub3": "0x60710010" # Target torque (must be mapped at RPDO0 or RPDO1)
+    # RPDO2
+    "1602sub0": "3" # Number of sub-indexes
+    "1602sub1": "0x60400010" # Control word
+    "1602sub2": "0x60600008" # Operating mode
+    "1602sub3": "0x60FF0020" # Target speed
+    # RPDO3
+    "1603sub0": "0" # Number of sub-indexes
+    # TPDO0
+    "1A00sub0": "4" # Number of sub-indexes
+    "1A00sub1": "0x60410010" # Status word
+    "1A00sub2": "0x60610008" # Operating mode status
+    "1A00sub3": "0x10010008" # Error register
+    "1A00sub4": "0x606C0020" # Actual speed feedback
+    # TPDO1
+    "1A01sub0": "3" # Number of sub-indexes
+    "1A01sub1": "0x60640020" # Actual position feedback
+    "1A01sub2": "0x60770010" # Real-time torque feedback
+    "1A01sub3": "0x20290010" # Real-time torque feedback
+    # TPDO2
+    "1802sub1": "$NODEID+0xC0000380" # COB-ID use by TPDO
+    "1A02sub0": "0" # Number of sub-indexes
+    # TPDO3
+    "1803sub1": "$NODEID+0xC0000480" # COB-ID use by TPDO
+    "1A03sub0": "0" # Number of sub-indexes
+    # Motor config
+    "200B": "4096" # Encoder wire setting
+    "200C": "15" # Motor pole pairs
+    # Tuning
+    #"2008": "1" # Initial speed
+    #"2019": "600" # Current loop propotional coefficient (dafault: 600)
+    #"201A": "300" # Current loop Integral gain (dafault: 300)
+    #"201D": "500" # Speed proportional gain Kp (dafault: 500)
+    #"201E": "100" # Speed integral gain Ki (dafault: 100)
+    #"201F": "1000" # Speed feedforward gain Kf (dafault: 1000)
+    "6083": "5" # S-shaped acceleration time (dafault: 500[ms])
+    "6084": "5" # S-shaped deceleration time (dafault: 500[ms])
+    #"6087": "300" # Torque slope (dafault: 300[ms])
+
+nodes:
+  left_wheel_motor:
+    id: 1
+    joint: left_wheel_joint
+    publish:
+    - "6077!" # Current [0.1A] (Real-time torque feedback)
+  right_wheel_motor:
+    id: 2
+    joint: right_wheel_joint
+    publish:
+    - "6077!" # Current [0.1A] (Real-time torque feedback)
+

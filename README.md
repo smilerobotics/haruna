@@ -38,6 +38,14 @@ DualSense or something
 roslaunch haruna main.launch
 ```
 
+If your Haruna is using EPOS4 motor drivers
+
+```bash
+roslaunch haruna main.launch motor_driver:=epos4
+```
+
+(The default value for `motor_driver` arg is `zlac8015`)
+
 ### Run to create a map
 
 Please set `ROS_MASTER_URI` and `ROS_IP`.
