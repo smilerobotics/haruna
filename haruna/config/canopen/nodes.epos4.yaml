@@ -8,12 +8,18 @@ defaults:
   eff_from_device: "obj30D2sub1*8.0/1000" # per thousand of `Motor rated torque` -> Nm
   motor_layer:
     stop_on_internal_limit: false
-  #dcf_overlay:
-  #  "6083": "20000" # Profile acceleration [rpm/s]
-  #  "6084": "20000" # Profile deceleration [rpm/s]
+  dcf_overlay:
+    #"30A0sub1": "1800000"
+    #"30A0sub2": "800000"
+    #"30A2sub1": "3600000" # Velocity controller P gain (1267021)
+    #"30A2sub2": "50000000" # Velocity controller I gain (23286400)
+    "30A2sub3": "80000" # Velocity controller FF velocity gain (35752)
+    "30A2sub4": "5000" # Velocity controller FF acceleration gain (17235)
+    #"6083": "4000" # Profile acceleration [rpm/s]
+    #"6084": "4000" # Profile deceleration [rpm/s]
+    #"60C5": "10000" # Max acceleration [rpm/s]
   #   "3001sub2": "30000" # Output current limit [mA]
   #   "607F": "4020" # Max profile velocity [rpm]
-  #   "60C5": "100000" # Max acceleration [rpm/s]
 
 nodes:
   left_wheel_motor:

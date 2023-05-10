@@ -2,17 +2,11 @@
   <!-- motor_driver: "epos4" or "zlac8015" -->
   <arg name="motor_driver" default="zlac8015"/>
 
-  <param name="dummy" command="cansend can0 77F#7F"/>
-
   <param name="robot_description" command="$(find xacro)/xacro $(find haruna)/urdf/test.urdf"/>
 
   <node name="canopen_motor_node" pkg="canopen_motor_node" type="canopen_motor_node" output="screen" clear_params="true" launch-prefix="" respawn="false">
     <rosparam command="load" file="$(find haruna)/config/canopen/bus.yaml"/>
     <rosparam command="load" file="$(find haruna)/config/canopen/nodes.$(arg motor_driver).yaml"/>
-
-    <!-- rename topic for current -->
-    <remap from="left_wheel_motor_30D1sub1" to="left_wheel_motor_current" if="$(eval arg('motor_driver') == 'epos4')"/>
-    <remap from="right_wheel_motor_30D1sub1" to="right_wheel_motor_current" if="$(eval arg('motor_driver') == 'epos4')"/>
   </node>
   <node name="ros_canopen_driver_init" pkg="rosservice" type="rosservice" args="call --wait /driver/init"/>
 
@@ -22,6 +16,12 @@
       args="/left_wheel_motor_6077 /left_wheel_motor_current std_msgs/Float64 'm.data / 10.0'"/>
     <node name="right_wheel_motor_current_transform" pkg="topic_tools" type="transform"
       args="/right_wheel_motor_6077 /right_wheel_motor_current std_msgs/Float64 'm.data / 10.0'"/>
+  </group>
+  <group if="$(eval arg('motor_driver') == 'epos4')">
+    <node name="left_wheel_motor_current_transform" pkg="topic_tools" type="transform"
+      args="/left_wheel_motor_30D1sub1 /left_wheel_motor_current std_msgs/Float64 'm.data / 1000.0'"/>
+    <node name="right_wheel_motor_current_transform" pkg="topic_tools" type="transform"
+      args="/right_wheel_motor_30D1sub1 /right_wheel_motor_current std_msgs/Float64 'm.data / 1000.0'"/>
   </group>
 
   <rosparam command="load" file="$(find haruna)/config/ros_control.yaml"/>
