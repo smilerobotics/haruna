@@ -1,10 +1,14 @@
 <launch>
+  <!-- motor_driver: "epos4" or "zlac8015" -->
+  <arg name="motor_driver" default="zlac8015"/>
   <arg name="vel_limit_linear" default="inf"/>
   <arg name="vel_limit_angular" default="inf"/>
   <arg name="acc_limit_linear" default="2.0"/>
   <arg name="acc_limit_angular" default="4.0"/>
 
-  <include file="$(dirname)/ros_canopen.launch"/>
+  <include file="$(dirname)/ros_canopen.launch">
+    <arg name="motor_driver" value="$(arg motor_driver)"/>
+  </include>
   <include file="$(dirname)/teleop.launch"/>
 
   <node name="base_controller" pkg="haruna" type="base_controller.py" output="screen">
