@@ -8,18 +8,67 @@ defaults:
   eff_from_device: "obj30D2sub1*8.0/1000" # per thousand of `Motor rated torque` -> Nm
   motor_layer:
     stop_on_internal_limit: false
-  #dcf_overlay:
-  #  "6083": "20000" # Profile acceleration [rpm/s]
-  #  "6084": "20000" # Profile deceleration [rpm/s]
-  #   "3001sub2": "30000" # Output current limit [mA]
-  #   "607F": "4020" # Max profile velocity [rpm]
-  #   "60C5": "100000" # Max acceleration [rpm/s]
+  dcf_overlay:
+    "1400sub2": "1" # RPDO1 Transmission type: synchronous
+    "1401sub2": "1" # RPDO2 Transmission type: synchronous
+    "1402sub2": "1" # RPDO3 Transmission type: synchronous
+    "1403sub2": "1" # RPDO4 Transmission type: synchronous
+    "1800sub2": "1" # TPDO1 Transmission type: synchronous
+    "1801sub2": "1" # TPDO2 Transmission type: synchronous
+    "1802sub2": "1" # TPDO3 Transmission type: synchronous
+    "1803sub2": "1" # TPDO4 Transmission type: synchronous
+    # PDO mapping
+    # RxPDO1
+    "1400sub1": "$NODEID+0x200" # COB-ID used by RxPDO
+    "1600sub0": "1" # Number of sub-indexes
+    "1600sub1": "0x60400010" # Control word (default)
+    # RxPDO2
+    "1401sub1": "$NODEID+0x300" # COB-ID used by RxPDO
+    "1601sub0": "2" # Number of sub-indexes
+    "1601sub1": "0x60400010" # Control word
+    "1601sub2": "0x60600008" # Modes of operation
+    # RxPDO3
+    "1402sub1": "$NODEID+0x400" # COB-ID used by RxPDO
+    "1602sub0": "2" # Number of sub-indexes
+    "1602sub1": "0x60400010" # Control word
+    "1602sub2": "0x607A0020" # Target position
+    # RxPDO4
+    "1403sub1": "$NODEID+0x500" # COB-ID used by RxPDO
+    "1603sub0": "2" # Number of sub-indexes
+    "1603sub1": "0x60400010" # Control word
+    "1603sub2": "0x60FF0020" # Target velocity
+    # TxPDO1
+    "1800sub1": "$NODEID+0x180" # COB-ID used by TxPDO
+    "1A00sub0": "2" # Number of sub-indexes
+    "1A00sub1": "0x60410010" # Status word
+    "1A00sub2": "0x60610008" # Modes of operation display
+    # TxPDO2
+    "1801sub1": "$NODEID+0x280" # COB-ID used by TxPDO
+    "1A01sub0": "2" # Number of sub-indexes
+    "1A01sub1": "0x60640020" # Position actual value
+    "1A01sub2": "0x606C0020" # Velocity actual value
+    # TxPDO3
+    "1802sub1": "$NODEID+0x380" # COB-ID used by TxPDO
+    "1A02sub0": "2" # Number of sub-indexes
+    "1A02sub1": "0x30D20110" # Torque actual value averaged
+    "1A02sub2": "0x30D10120" # Current actual value averaged
+    # TxPDO4
+    "1803sub1": "$NODEID+0x80000480" # COB-ID used by TxPDO
+    "1A03sub0": "0" # Number of sub-indexes
+
+    "3000sub4": "0x01" # Axis configuration miscellaneous (bit0: Axis polarity)
+    "6098": "37" # Homing method (37: Actual Position)
+    #"3001sub2": "16000" # Output current limit [mA]
+    #"607F": "180" # Max profile velocity [rpm]
+    #"6081": "180" # Profile velocity [rpm]
+    #"6083": "1000" # Profile acceleration [rpm/s]
+    #"6084": "1000" # Profile deceleration [rpm/s]
 
 nodes:
   left_wheel_motor:
     id: 1
     joint: left_wheel_joint
-    eds_file: "dcf//node1.dcf"
+    eds_file: "dcf/node1.dcf"
     publish:
     - "30D1sub1!" # Current actual value averaged
   right_wheel_motor:
