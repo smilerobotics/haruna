@@ -1,6 +1,6 @@
 # 2-CH CAN HAT
 
-[Support site](https://www.ixxat.com/ja/products/products-industrial/can-interfaces/usb/usb-to-can-v2)
+[Support site](https://www.waveshare.com/wiki/2-CH_CAN_HAT)
 
 ## Prepare
 
