@@ -1,4 +1,4 @@
-FROM ros:noetic-ros-base
+FROM ros:noetic-ros-base AS builder
 
 SHELL ["/bin/bash", "-c"]
 
@@ -19,7 +19,8 @@ RUN apt-get update \
  && rosdep install --from-paths . -y \
  && rm -rf /var/lib/apt/lists/* \
  && source /opt/ros/noetic/setup.bash \
- && catkin build \
- && source /root/catkin_ws/devel/setup.bash
+ && catkin build
 
-WORKDIR /root
+FROM ros:noetic-ros-base
+
+COPY --from=builder /root/catkin_ws /root/catkin_ws
