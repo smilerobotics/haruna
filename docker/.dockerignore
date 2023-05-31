@@ -1,5 +1,2 @@
 **/*.gitignore
 **/README.md
-
-build
-devel

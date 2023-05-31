@@ -10,7 +10,7 @@ Follow tutorials below:
 
 ## Build a docker image and create a docker container
 
-Build a docker image:
+(Optional) Build a docker image:
 
 ```bash
 cd {HARUNA_DIRECTORY}/docker
