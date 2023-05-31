@@ -34,7 +34,7 @@ docker compose exec haruna /bin/bash
 Set up haruna:
 
 ```bash
-source /root/catkin_ws/devel/setup.bash
+source /root/catkin_ws/install/setup.bash
 ```
 
 Then you can use `roslaunch` command to launch haruna.
