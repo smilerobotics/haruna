@@ -15,7 +15,9 @@ RUN apt-get update && \
     git clone -b feat/dockerfile https://github.com/smilerobotics/haruna.git && \
     vcs import < haruna/.rosinstall && \
     rosdep install --from-paths . -y && \
-    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN cd /root/catkin_ws && \
     source /opt/ros/noetic/setup.bash && \
     catkin config --install && \
     catkin build && \
