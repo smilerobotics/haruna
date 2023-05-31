@@ -1,0 +1,8 @@
+services:
+
+  haruna:
+    build: .
+    image: haruna:latest
+    container_name: haruna
+    privileged: true
+    network_mode: "host"
