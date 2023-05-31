@@ -6,3 +6,4 @@ services:
     container_name: haruna
     privileged: true
     network_mode: "host"
+    tty: true
