@@ -10,8 +10,7 @@ Follow tutorials below:
 
 ## Build a docker image and create a docker container
 
-Build a docker image.
-It would take 1200 seconds:
+Build a docker image:
 
 ```bash
 cd {HARUNA_DIRECTORY}/docker
