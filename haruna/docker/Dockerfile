@@ -6,8 +6,6 @@ RUN <<EOF \
 apt update && apt install -y \
     can-utils \
     git \
-    iputils-ping \
-    net-tools \
     python3-catkin-tools \
     python3-vcstool
 mkdir -p /root/catkin_ws/src
