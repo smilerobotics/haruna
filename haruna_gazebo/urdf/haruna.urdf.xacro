@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<robot name="haruna" xmlns:xacro="http://wiki.ros.org/xacro">
+    
+    <xacro:property name="wheelwidth" value="0.085" />
+    <xacro:property name="wheellen" value="0.075" />
+    <xacro:property name="bodywidth" value="0.25" />
+    <xacro:property name="bodylen" value="0.01" />
+    <xacro:property name="pi" value="3.1415" />
+
+    <xacro:macro name="default_inertial" params="mass">
+        <inertial>
+            <mass value="${mass}" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+        </inertial>
+    </xacro:macro>
+
+    <link name="base_link" />
+    
+    <joint name="base_to_body" type="fixed">
+        <origin xyz="0.0 0.0 0.12" rpy="0.0 0.0 0.0" />
+        <parent link="base_link"/>
+        <child link="body"/>
+    </joint>
+
+    <link name="body">
+        <visual>
+            <origin xyz="0.0 0.0 0.05" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="${bodywidth}" length="${bodylen}" />
+            </geometry>
+            <material name="body">
+                <color rgba="0.8 0.8 0.8 0.5"/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name="left_wheel_joint" type="continuous">
+	    <origin xyz="0.0 0.17055 0.0" rpy="0.0 0.0 0.0"/>
+	    <axis xyz="0 1 0"/>
+	    <parent link="body"/>
+	    <child link="left_wheel_link"/>
+    </joint>
+
+    <link name="left_wheel_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="1.57 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="${wheelwidth}" length="${wheellen}"/>
+            </geometry>
+            <material name="wheel">
+                <color rgba="0.8 0.8 0.8 1.0"/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name="right_wheel_joint" type="continuous">
+        <origin xyz="0.0 -0.17055 0.0" rpy="0.0 0.0 ${pi}"/>
+        <axis xyz="0 1 0"/>
+        <parent link="body"/>
+        <child link="right_wheel_link"/>
+    </joint>
+
+    <link name="right_wheel_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="${-pi/2} 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="${wheelwidth}" length="${wheellen}"/>
+            </geometry>
+            <material name="wheel">
+                <color rgba="0.8 0.8 0.8 1.0"/>
+            </material>
+        </visual>
+    </link>
+
+    <link name="laser" />
+
+    <joint name="body_to_laser" type="fixed">
+        <parent link="body"/>
+        <child link="laser"/>
+        <origin rpy="0 3.14 0" xyz="0.22 0 0.18"/>
+    </joint>
+</robot>
