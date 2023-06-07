@@ -12,7 +12,7 @@ RUN apt-get update && \
     cd /root/catkin_ws && \
     catkin init && \
     cd /root/catkin_ws/src && \
-    git clone -b feat/dockerfile https://github.com/smilerobotics/haruna.git && \
+    git clone https://github.com/smilerobotics/haruna.git && \
     vcs import < haruna/.rosinstall && \
     rosdep install --from-paths . -y && \
     rm -rf /var/lib/apt/lists/*
