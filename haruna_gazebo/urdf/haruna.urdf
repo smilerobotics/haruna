@@ -1,0 +1,342 @@
+<?xml version="1.0" ?>
+<robot name="haruna">
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="1.0338131004861055e-16 5.1690655024305274e-17 0.157" rpy="0 0 0"/>
+      <mass value="1.381203895667492"/>
+      <inertia ixx="0.019888" iyy="0.023891" izz="0.043779" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver">
+        <color rgba="0.700 0.700 0.700 1.000"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="front_leg_link_1">
+    <inertial>
+      <origin xyz="0.20000000000000004 0.0 -0.23149999999999998" rpy="0 0 0"/>
+      <mass value="0.0"/>
+      <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/front_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver">
+        <color rgba="0.700 0.700 0.700 1.000"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/front_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="back_leg_link_1">
+    <inertial>
+      <origin xyz="-0.2 0.0 -0.23149999999999998" rpy="0 0 0"/>
+      <mass value="0.0"/>
+      <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/back_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver">
+        <color rgba="0.700 0.700 0.700 1.000"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/back_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="right_leg_link_1">
+    <inertial>
+      <origin xyz="0.0 -0.10865606936416185 -0.19859393063583816" rpy="0 0 0"/>
+      <mass value="0.06790249999999999"/>
+      <inertia ixx="3.8e-05" iyy="3.8e-05" izz="2e-06" ixy="-0.0" iyz="-2e-06" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/right_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver">
+        <color rgba="0.700 0.700 0.700 1.000"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/right_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="left_leg_link_1">
+    <inertial>
+      <origin xyz="0.0 0.10865606936416185 -0.19859393063583816" rpy="0 0 0"/>
+      <mass value="0.06790249999999999"/>
+      <inertia ixx="3.8e-05" iyy="3.8e-05" izz="2e-06" ixy="0.0" iyz="2e-06" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/left_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver">
+        <color rgba="0.700 0.700 0.700 1.000"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/left_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="left_wheel_link_1">
+    <inertial>
+      <origin xyz="-1.0685163737249417e-17 0.037500000000000006 0.0" rpy="0 0 0"/>
+      <mass value="13.363451575437157"/>
+      <inertia ixx="0.030402" iyy="0.048275" izz="0.030402" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0 -0.1225 -0.085" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/left_wheel_link_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0 -0.1225 -0.085" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/left_wheel_link_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="right_wheel_link_1">
+    <inertial>
+      <origin xyz="-1.0685163737249417e-17 -0.037500000000000006 0.0" rpy="0 0 0"/>
+      <mass value="13.363451575437157"/>
+      <inertia ixx="0.030402" iyy="0.048275" izz="0.030402" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0 0.1225 -0.085" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/right_wheel_link_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0 0.1225 -0.085" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://haruna_gazebo/meshes/right_wheel_link_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="base_to_front_leg_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.313" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="front_leg_link_1"/>
+  </joint>
+
+  <joint name="base_to_back_leg_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.313" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="back_leg_link_1"/>
+  </joint>
+
+  <joint name="base_to_right_leg_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.313" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="right_leg_link_1"/>
+  </joint>
+
+  <joint name="base_to_left_leg_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.313" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="left_leg_link_1"/>
+  </joint>
+
+  <joint name="left_leg_to_left_wheel_joint" type="continuous">
+    <origin xyz="0.0 0.1225 -0.228" rpy="0 0 0"/>
+    <parent link="left_leg_link_1"/>
+    <child link="left_wheel_link_1"/>
+    <axis xyz="0.0 1.0 0.0"/>
+  </joint>
+
+  <joint name="right_leg_to_right_wheel_joint" type="continuous">
+    <origin xyz="0.0 -0.1225 -0.228" rpy="0 0 0"/>
+    <parent link="right_leg_link_1"/>
+    <child link="right_wheel_link_1"/>
+    <axis xyz="0.0 1.0 0.0"/>
+  </joint>
+
+  <link name="laser_link">
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+       <cylinder radius="0.015" length="0.03"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+       <cylinder radius="0.015" length="0.03"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="base_to_laser" type="fixed">
+    <origin xyz="0.2 0.0 0.17" rpy="0.0 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="laser_link"/>
+  </joint>
+
+  <!-- ===============  Transmission =============== -->
+
+  <transmission name="left_leg_to_left_wheel_joint_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_leg_to_left_wheel_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_leg_to_left_wheel_joint_actr">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="right_leg_to_right_wheel_joint_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_leg_to_right_wheel_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_leg_to_right_wheel_joint_actr">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- =============== Gazebo =============== -->
+
+  <gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <leftJoint>left_leg_to_left_wheel_joint</leftJoint>
+      <rightJoint>right_leg_to_right_wheel_joint</rightJoint>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <wheelSeparation>0.36</wheelSeparation>
+      <wheelDiameter>0.17</wheelDiameter>
+      <updateRate>50</updateRate>
+      <publishWheelJointState>true</publishWheelJointState>
+    </plugin>
+  </gazebo>
+
+  <!-- <gazebo>
+    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <jointName>base_to_front_leg_joint, base_to_back_leg_joint, base_to_right_leg_joint, base_to_left_leg_joint, base_to_laser</jointName>
+    </plugin>
+  </gazebo> -->
+  
+  <gazebo reference="base_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+    <gravity>true</gravity>
+  </gazebo>
+
+  <gazebo reference="front_leg_link_1">
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="back_leg_link_1">
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="right_leg_link_1">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="left_leg_link_1">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="left_wheel_link_1">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="right_wheel_link_1">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="laser_link">
+    <sensor type="ray" name="hokuyo">
+      <pose>0 0 0 0 0 0 </pose>
+      <visualize>false</visualize>
+      <update_rate>30</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+      </ray>
+      <plugin name="laser" filename="libgazebo_ros_laser.so">
+        <topicName>/scan</topicName>
+        <frameName>laser_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+</robot>
