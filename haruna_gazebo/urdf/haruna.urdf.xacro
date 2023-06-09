@@ -2,8 +2,8 @@
 <robot name="haruna" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <!-- <xacro:include filename="$(find haruna_gazebo)/urdf/materials.xacro" /> -->
-<!-- <xacro:include filename="$(find haruna_gazebo)/urdf/haruna.trans" /> -->
-<!-- <xacro:include filename="$(find haruna_gazebo)/urdf/haruna.gazebo" /> -->
+<xacro:include filename="$(find haruna_gazebo)/urdf/haruna.trans" />
+<xacro:include filename="$(find haruna_gazebo)/urdf/haruna.gazebo" />
 <link name="base_link">
   <!-- <inertial>
     <origin xyz="1.0338131004861055e-16 5.1690655024305274e-17 0.157" rpy="0 0 0"/>
@@ -13,14 +13,14 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <!-- <material name="silver"/> -->
   </visual>
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -34,14 +34,14 @@
   <visual>
     <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/front_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/front_leg_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <!-- <material name="silver"/> -->
   </visual>
   <collision>
     <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/front_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/front_leg_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -55,14 +55,14 @@
   <visual>
     <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/back_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/back_leg_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <!-- <material name="silver"/> -->
   </visual>
   <collision>
     <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/back_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/back_leg_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -76,14 +76,14 @@
   <visual>
     <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/right_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/right_leg_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <!-- <material name="silver"/> -->
   </visual>
   <collision>
     <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/right_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/right_leg_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -97,14 +97,14 @@
   <visual>
     <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/left_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/left_leg_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <!-- <material name="silver"/> -->
   </visual>
   <collision>
     <origin xyz="-0.0 -0.0 -0.313" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/left_leg_link_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/left_leg_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -118,14 +118,14 @@
   <visual>
     <origin xyz="-0.0 -0.1225 -0.085" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/left_wheel_link_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/left_wheel_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <!-- <material name="silver"/> -->
   </visual>
   <collision>
     <origin xyz="-0.0 -0.1225 -0.085" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/left_wheel_link_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/left_wheel_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -139,14 +139,14 @@
   <visual>
     <origin xyz="-0.0 0.1225 -0.085" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/right_wheel_link_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/right_wheel_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <!-- <material name="silver"/> -->
   </visual>
   <collision>
     <origin xyz="-0.0 0.1225 -0.085" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="../meshes/right_wheel_link_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://haruna_gazebo/meshes/right_wheel_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>

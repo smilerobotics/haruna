@@ -1,5 +1,5 @@
 <launch>
-  <arg name="model" default="$(find haruna_gazebo)/urdf/haruna.xacro"/>
+  <arg name="model" default="$(find haruna_gazebo)/urdf/haruna.urdf.xacro"/>
   <arg name="gui" default="true"/>
   <arg name="rvizconfig" default="$(find haruna_gazebo)/launch/urdf.rviz"/>
   <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
