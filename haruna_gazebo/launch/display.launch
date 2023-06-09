@@ -1,6 +1,6 @@
 <launch>
 
-  <arg name="model" default="$(find haruna_gazebo)/urdf/haruna.urdf.xacro"/>
+  <arg name="model" default="$(find haruna_gazebo)/urdf/haruna.urdf"/>
   <arg name="gui" default="true" />
   <arg name="rvizconfig" default="$(find haruna_gazebo)/launch/urdf.rviz" />
 
