@@ -67,7 +67,7 @@ Please set `ROS_MASTER_URI` and `ROS_IP`.
 roslaunch haruna_navigation mapping_auto.launch
 ```
 
-#### On robot master (Laptop or Desktop or else)
+### On robot master (Laptop or Desktop or else)
 
 ```bash
 roslaunch haruna_navigation mapping_auto_rviz.launch
