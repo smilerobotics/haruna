@@ -35,6 +35,8 @@ DualSense or something
 
 ## Run
 
+### Run on a physical machine
+
 ```bash
 roslaunch haruna main.launch
 ```
@@ -47,22 +49,30 @@ roslaunch haruna main.launch motor_driver:=epos4
 
 (The default value for `motor_driver` arg is `zlac8015`)
 
-### Run to create a map
+### Run on simulaters
+
+#### Gazebo
+
+```bash
+roslaunch haruna_simulations gazebo.launch
+```
+
+## Create a map
 
 Please set `ROS_MASTER_URI` and `ROS_IP`.
 
-#### Robot client (Raspberry Pi)
+### On robot client (Raspberry Pi)
 
 ```bash
 roslaunch haruna_navigation mapping_auto.launch
 ```
 
-#### Robot master (Laptop or Desktop or else)
+#### On robot master (Laptop or Desktop or else)
 
 ```bash
 roslaunch haruna_navigation mapping_auto_rviz.launch
 ```
 
-### Launch file
+## Launch files
 
-The description of the launch file is [here](./docs/launch.md)
+For more descriptions of the launch file, please check [here](./docs/launch.md)
