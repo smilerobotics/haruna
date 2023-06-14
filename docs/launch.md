@@ -6,6 +6,12 @@
 | ------------------------------------------- | -------------------------------- |
 | [main.launch](../haruna/launch/main.launch) | Control the robot using joystick |
 
+## For simulation
+
+| File name                                   | Purpose                          |
+| ------------------------------------------- | -------------------------------- |
+| [gazebo.launch](../haruna_simulations/launch/gazebo.launch) | Simulate haruna on Gazebo |
+
 ## For manual mapping
 
 | File name                                                              | Purpose                                          |
