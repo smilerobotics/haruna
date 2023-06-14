@@ -35,7 +35,7 @@ DualSense or something
 
 ## Run
 
-### Run on a physical machine
+### Run on a real robot
 
 ```bash
 roslaunch haruna main.launch
