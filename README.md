@@ -49,7 +49,7 @@ roslaunch haruna main.launch motor_driver:=epos4
 
 (The default value for `motor_driver` arg is `zlac8015`)
 
-### Run on simulaters
+### Run on simulators
 
 #### Gazebo
 
