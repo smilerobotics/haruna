@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>haruna_description</name>
+  <version>0.0.0</version>
+  <description>The haruna_description package</description>
+
+  <maintainer email="kazmeegawa@todo.todo">kazmeegawa</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>urdf</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  
+</package>

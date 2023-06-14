@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>haruna_gazebo</name>
+  <name>haruna_simulations</name>
   <version>0.0.0</version>
-  <description>The haruna_gazebo package</description>
+  <description>The haruna_simulations package</description>
 
   <maintainer email="kazmeegawa@todo.todo">kazmeegawa</maintainer>
 
