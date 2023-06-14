@@ -1,17 +1,5 @@
 <launch>
-  <arg name="vel_limit_linear" default="inf"/>
-  <arg name="vel_limit_angular" default="inf"/>
-  <arg name="acc_limit_linear" default="2.0"/>
-  <arg name="acc_limit_angular" default="4.0"/>
-  <arg name="lidar" default="rplidar"/>
-
-  <include file="$(dirname)/mapping.launch">
-    <arg name="vel_limit_linear" value="$(arg vel_limit_linear)"/>
-    <arg name="vel_limit_angular" value="$(arg vel_limit_angular)"/>
-    <arg name="acc_limit_linear" value="$(arg acc_limit_linear)"/>
-    <arg name="acc_limit_angular" value="$(arg acc_limit_angular)"/>
-    <arg name="lidar" value="$(arg lidar)"/>
-  </include>
+  <include file="$(dirname)/mapping.launch"></include>
 
   <!-- MoveBase -->
   <include file="$(dirname)/move_base.launch"/>
