@@ -1,6 +1,8 @@
 <launch>
   <!-- motor_driver: "epos4" or "zlac8015" -->
   <arg name="motor_driver" default="zlac8015"/>
+  <!-- LiDAR, laser scan -->
+  <arg name="lidar" default="rplidar"/>
   <arg name="vel_limit_linear" default="inf"/>
   <arg name="vel_limit_angular" default="inf"/>
   <arg name="acc_limit_linear" default="2.0"/>
@@ -8,6 +10,7 @@
 
   <include file="$(dirname)/ros_canopen.launch">
     <arg name="motor_driver" value="$(arg motor_driver)"/>
+    <arg name="lidar" value="$(arg lidar)"/>
   </include>
   <include file="$(dirname)/teleop.launch"/>
 

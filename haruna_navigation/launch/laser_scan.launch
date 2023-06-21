@@ -1,0 +1,17 @@
+<launch>
+  <!-- lidar: "rplidar" or "ydlidar"-->
+  <arg name="lidar" default="rplidar" />
+
+  <!-- LiDAR -->
+  <group if="$(eval lidar == 'rplidar')">
+    <include file="$(find rplidar_ros)/launch/rplidar_s1.launch" />
+  </group>
+  <group if="$(eval lidar == 'ydlidar')">
+    <include file="$(find haruna_navigation)/launch/ydlidar_tmini.launch" />
+  </group>
+
+  <!-- Laser filter-->
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
+    <rosparam command="load" file="$(dirname)/../config/laser_filter/$(arg lidar).yaml" />
+  </node>
+</launch>
