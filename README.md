@@ -49,6 +49,8 @@ roslaunch haruna main.launch motor_driver:=epos4
 
 (The default value for `motor_driver` arg is `zlac8015`)
 
+More details on other options, including LiDAR, [here](./docs/argument.md)
+
 ### Run on simulators
 
 #### Gazebo
