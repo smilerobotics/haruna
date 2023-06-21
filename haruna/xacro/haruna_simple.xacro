@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<robot name="haruna_simple" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:arg name="lidar" default="rplidar" />
+
+  <xacro:property name="body_radius" value="0.25" />
+  <xacro:property name="body_length" value="0.01" />
+  <xacro:property name="wheel_radius" value="0.085" />
+  <xacro:property name="wheel_length" value="0.075" />
+  <xacro:property name="tread_width" value="0.3411" />
+  <xacro:property name="lidar_xyz" value="0.22 0.0 0.18" />
+
+  <material name="body">
+    <color rgba="0.8 0.8 0.8 0.5" />
+  </material>
+
+  <material name="wheel">
+    <color rgba="0.8 0.8 0.8 1.0" />
+  </material>
+
+  <link name="base_link" />
+  <joint name="base_link_to_body" type="fixed">
+    <origin xyz="0.0 0.0 0.12" rpy="0.0 0.0 0.0" />
+    <parent link="base_link" />
+    <child link="body" />
+  </joint>
+
+  <link name="body">
+    <visual>
+      <origin xyz="0.0 0.0 0.05" rpy="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder radius="${body_radius}" length="${body_length}" />
+      </geometry>
+      <material name="body" />
+    </visual>
+  </link>
+
+  <xacro:macro name="wheel_link" params="suffix direction yaw">
+    <joint name="${suffix}_wheel_joint" type="continuous">
+      <origin xyz="0.0 ${direction*tread_width/2} 0.0" rpy="0.0 0.0 ${yaw}" />
+      <axis xyz="0 1 0" />
+      <parent link="body" />
+      <child link="${suffix}_wheel_link" />
+    </joint>
+
+    <link name="${suffix}_wheel_link">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="${direction*pi/2} 0.0 0.0" />
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+        </geometry>
+        <material name="wheel" />
+      </visual>
+    </link>
+  </xacro:macro>
+
+  <xacro:wheel_link suffix="left" direction="1" yaw="0" />
+  <xacro:wheel_link suffix="right" direction="-1" yaw="${pi}" />
+
+  <!-- Geometry for LiDAR -->
+  <link name="laser" />
+  <joint name="body_to_laser" type="fixed">
+    <parent link="body" />
+    <child link="laser" />
+    <xacro:if value="$(eval lidar == 'rplidar')">
+      <origin rpy="0 ${pi} 0" xyz="${lidar_xyz}" />
+    </xacro:if>
+    <xacro:if value="$(eval lidar == 'ydlidar')">
+      <origin rpy="${pi} 0 0" xyz="${lidar_xyz}" />
+    </xacro:if>
+  </joint>
+
+</robot>

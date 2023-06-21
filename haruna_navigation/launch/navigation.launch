@@ -3,6 +3,7 @@
   <arg name="vel_limit_angular" default="inf"/>
   <arg name="acc_limit_linear" default="2.0"/>
   <arg name="acc_limit_angular" default="4.0"/>
+  <arg name="lidar" default="rplidar"/>
 
   <!-- Base controller -->
   <include file="$(find haruna)/launch/main.launch">
@@ -10,15 +11,13 @@
     <arg name="vel_limit_angular" value="$(arg vel_limit_angular)"/>
     <arg name="acc_limit_linear" value="$(arg acc_limit_linear)"/>
     <arg name="acc_limit_angular" value="$(arg acc_limit_angular)"/>
+    <arg name="lidar" value="$(arg lidar)"/>
   </include>
 
-  <!-- RPLiDAR -->
-  <include file="$(find rplidar_ros)/launch/rplidar_s1.launch"/>
-
-  <!-- Laser filter -->
-  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
-    <rosparam command="load" file="$(dirname)/../config/laser_filter.yaml" />
-  </node>
+  <!-- LiDAR, laser scan -->
+  <include file="$(dirname)/laser_scan.launch">
+    <arg name="lidar" value="$(arg lidar)"/>
+  </include>
 
   <!-- MoveBase -->
   <include file="$(dirname)/move_base.launch"/>

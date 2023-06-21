@@ -1,10 +1,12 @@
 <launch>
   <!-- motor_driver: "epos4" or "zlac8015" -->
   <arg name="motor_driver" default="zlac8015"/>
+  <!-- LiDAR, laser scan -->
+  <arg name="lidar" default="rplidar"/>
 
   <param name="dummy" command="cansend can0 77F#7F"/>
 
-  <param name="robot_description" command="$(find xacro)/xacro $(find haruna)/urdf/test.urdf"/>
+  <param name="robot_description" command="$(find xacro)/xacro $(find haruna)/xacro/haruna_simple.xacro lidar:=$(arg lidar)"/>
 
   <node name="canopen_motor_node" pkg="canopen_motor_node" type="canopen_motor_node" output="screen" clear_params="true" launch-prefix="" respawn="false">
     <rosparam command="load" file="$(find haruna)/config/canopen/bus.yaml"/>
