@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<robot name="haruna" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="lidar" default="rplidar" />
+
+  <xacro:include filename="$(find haruna_description)/urdf/haruna.trans" />
+  <xacro:include filename="$(find haruna_description)/urdf/haruna.gazebo" />
+
+  <xacro:property name="tread_width" value="0.324" />
+  <xacro:property name="wheel_radius" value="0.085" />
+  <xacro:property name="wheel_length" value="0.075" />
+  <xacro:property name="side_leg_length" value="0.0715" />
+  <xacro:property name="side_leg_depth" value="0.015" />
+  <xacro:property name="base_link_offset" value="0.1565" />
+  <xacro:property name="lidar_xyz" value="0.2 0.0 0.17" />
+
+  <material name="silver">
+    <color rgba="0.7 0.7 0.7 1.0" />
+  </material>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 ${base_link_offset}" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://haruna_description/meshes/base_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${base_link_offset}" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://haruna_description/meshes/base_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <xacro:macro name="wheel_link" params="suffix direction">
+    <link name="${suffix}_wheel_link">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://haruna_description/meshes/wheel_link.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="silver" />
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://haruna_description/meshes/wheel_link.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${suffix}_leg_link">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${direction*pi/2}" />
+        <geometry>
+          <mesh filename="package://haruna_description/meshes/side_leg_link.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="silver" />
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${direction*pi/2}" />
+        <geometry>
+          <mesh filename="package://haruna_description/meshes/side_leg_link.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${suffix}_leg_to_${suffix}_wheel_joint" type="continuous">
+      <origin xyz="0.0 ${direction*(side_leg_depth+0.5*wheel_length)} ${-side_leg_length}"
+        rpy="0.0 0.0 0.0" />
+      <parent link="${suffix}_leg_link" />
+      <child link="${suffix}_wheel_link" />
+      <axis xyz="0 1 0" />
+    </joint>
+
+    <joint name="base_to_${suffix}_leg_joint" type="fixed">
+      <origin
+        xyz="0.0 ${direction*(0.5*(tread_width-wheel_length)-side_leg_depth)} ${base_link_offset}"
+        rpy="0.0 0.0 0.0" />
+      <parent link="base_link" />
+      <child link="${suffix}_leg_link" />
+    </joint>
+  </xacro:macro>
+
+  <xacro:wheel_link suffix="left" direction="1" />
+  <xacro:wheel_link suffix="right" direction="-1" />
+
+  <xacro:macro name="leg_link" params="suffix direction">
+    <link name="${suffix}_leg_link">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        <geometry>
+          <mesh filename="package://haruna_description/meshes/leg_link.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="silver" />
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        <geometry>
+          <mesh filename="package://haruna_description/meshes/leg_link.stl"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="base_to_${suffix}_leg_joint" type="fixed">
+      <origin xyz="${direction*0.2} 0.0 ${base_link_offset}" rpy="${pi} 0.0 0.0" />
+      <parent link="base_link" />
+      <child link="${suffix}_leg_link" />
+    </joint>
+  </xacro:macro>
+
+  <xacro:leg_link suffix="front" direction="1" />
+  <xacro:leg_link suffix="back" direction="-1" />
+
+  <link name="laser">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder radius="0.015" length="0.03" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder radius="0.015" length="0.03" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="base_to_laser" type="fixed">
+    <xacro:if value="$(eval lidar == 'rplidar')">
+      <origin xyz="${lidar_xyz}" rpy="0 ${pi} 0" />
+    </xacro:if>
+    <xacro:if value="$(eval lidar == 'ydlidar')">
+      <origin xyz="${lidar_xyz}" rpy="${pi} 0 0" />
+    </xacro:if>
+    <parent link="base_link" />
+    <child link="laser" />
+  </joint>
+
+</robot>
