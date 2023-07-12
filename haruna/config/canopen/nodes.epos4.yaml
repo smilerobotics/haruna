@@ -67,13 +67,13 @@ defaults:
 nodes:
   left_wheel_motor:
     id: 1
-    joint: left_wheel_joint
+    joint: left_leg_to_left_wheel_joint
     eds_file: "dcf/node1.dcf"
     publish:
     - "30D1sub1!" # Current actual value averaged
   right_wheel_motor:
     id: 2
-    joint: right_wheel_joint
+    joint: right_leg_to_right_wheel_joint
     eds_file: "dcf/node2.dcf"
     publish:
     - "30D1sub1!" # Current actual value averaged
