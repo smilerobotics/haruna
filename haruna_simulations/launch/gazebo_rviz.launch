@@ -1,7 +1,8 @@
 <launch>
   <arg name="rvizconfig" default="$(find haruna_simulations)/rviz/gazebo.rviz" />
-  <arg name="laser_filter_file" default="$(find haruna_navigation)/config/laser_filter.yaml" />
-  <param name="robot_description" textfile="$(find haruna_description)/urdf/haruna.urdf" />
+  <arg name="laser_filter_file" default="$(find haruna_navigation)/config/laser_filter/rplidar.yaml" />
+  <arg name="model" default="$(find haruna_description)/urdf/haruna.xacro" />
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch" />
 

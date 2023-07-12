@@ -7,6 +7,7 @@
   <arg name="vel_limit_angular" default="inf"/>
   <arg name="acc_limit_linear" default="2.0"/>
   <arg name="acc_limit_angular" default="4.0"/>
+  <arg name="laser_filter_file" default="$(find haruna_navigation)/config/laser_filter.yaml" />
 
   <include file="$(dirname)/ros_canopen.launch">
     <arg name="motor_driver" value="$(arg motor_driver)"/>
@@ -19,6 +20,14 @@
     <param name="vel_limit_angular" value="$(arg vel_limit_angular)"/>
     <param name="acc_limit_linear" value="$(arg acc_limit_linear)"/>
     <param name="acc_limit_angular" value="$(arg acc_limit_angular)"/>
+  </node>
+
+  <!-- RPLiDAR -->
+  <include file="$(find rplidar_ros)/launch/rplidar_s1.launch"/>
+
+  <!-- Laser filter -->
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
+    <rosparam command="load" file="$(arg laser_filter_file)" />
   </node>
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>

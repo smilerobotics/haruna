@@ -1,24 +1,4 @@
 <launch>
-  <arg name="vel_limit_linear" default="0.1"/>
-  <arg name="vel_limit_angular" default="0.2"/>
-  <arg name="acc_limit_linear" default="1.0"/>
-  <arg name="acc_limit_angular" default="2.0"/>
-  <arg name="lidar" default="rplidar"/>
-
-  <!-- Base controller -->
-  <include file="$(find haruna)/launch/main.launch">
-    <arg name="vel_limit_linear" value="$(arg vel_limit_linear)"/>
-    <arg name="vel_limit_angular" value="$(arg vel_limit_angular)"/>
-    <arg name="acc_limit_linear" value="$(arg acc_limit_linear)"/>
-    <arg name="acc_limit_angular" value="$(arg acc_limit_angular)"/>
-    <arg name="lidar" value="$(arg lidar)"/>
-  </include>
-
-  <!-- LiDAR, laser scan -->
-  <include file="$(dirname)/laser_scan.launch">
-    <arg name="lidar" value="$(arg lidar)"/>
-  </include>
-
   <!-- SLAM Toolbox -->
   <node pkg="slam_toolbox" type="sync_slam_toolbox_node" name="slam_toolbox" output="screen">
     <rosparam command="load" file="$(dirname)/../config/slam_toolbox/mapper_params_online_sync.yaml"/>

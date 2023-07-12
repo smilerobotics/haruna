@@ -8,7 +8,7 @@ find_package(catkin REQUIRED)
 catkin_package()
 
 install(
-    DIRECTORY config dcf eds launch tools urdf
+    DIRECTORY config dcf eds launch tools
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
 install(
