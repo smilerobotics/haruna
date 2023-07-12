@@ -7,4 +7,12 @@ find_package(catkin REQUIRED)
 
 catkin_package()
 
-install(DIRECTORY config launch maps DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+install(
+    DIRECTORY config launch maps
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+install(
+    DIRECTORY scripts
+    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+    PATTERN "scripts/*.py"
+    PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)

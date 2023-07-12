@@ -13,4 +13,6 @@
   <exec_depend>rplidar_ros</exec_depend>
   <exec_depend>slam_toolbox</exec_depend>
   <exec_depend>teb_local_planner</exec_depend>
+  <exec_depend>realsense2_camera</exec_depend>
+  <exec_depend>aruco_ros</exec_depend>
 </package>
