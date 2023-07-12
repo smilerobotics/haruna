@@ -18,6 +18,11 @@
   </material>
 
   <link name="base_link">
+    <inertial>
+      <origin xyz="0.0 0.0 ${base_link_offset}" rpy="0.0 0.0 0.0"/>
+      <mass value="1.381203895667492"/>
+      <inertia ixx="0.019888" iyy="0.023891" izz="0.043779" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
     <visual>
       <origin xyz="0 0 ${base_link_offset}" rpy="0 0 0" />
       <geometry>
@@ -35,6 +40,11 @@
 
   <xacro:macro name="wheel_link" params="suffix direction">
     <link name="${suffix}_wheel_link">
+      <inertial>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <mass value="13.363451575437157"/>
+        <inertia ixx="0.030402" iyy="0.048275" izz="0.030402" ixy="0.0" iyz="0.0" ixz="0.0"/>
+      </inertial>
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
         <geometry>
@@ -53,6 +63,11 @@
     </link>
 
     <link name="${suffix}_leg_link">
+      <inertial>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <mass value="0.0679"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${direction*pi/2}" />
         <geometry>
@@ -92,6 +107,11 @@
 
   <xacro:macro name="leg_link" params="suffix direction">
     <link name="${suffix}_leg_link">
+      <inertial>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <mass value="0.0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -120,6 +140,11 @@
   <xacro:leg_link suffix="back" direction="-1" />
 
   <link name="laser">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.0"/>
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
     <visual>
       <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
       <geometry>
