@@ -6,7 +6,7 @@
 
   <param name="dummy" command="cansend can0 77F#7F"/>
 
-  <param name="robot_description" command="$(find xacro)/xacro $(find haruna)/xacro/haruna_simple.xacro lidar:=$(arg lidar)"/>
+  <param name="robot_description" command="$(find xacro)/xacro $(find haruna_description)/urdf/haruna.xacro lidar:=$(arg lidar)"/>
 
   <node name="canopen_motor_node" pkg="canopen_motor_node" type="canopen_motor_node" output="screen" clear_params="true" launch-prefix="" respawn="false">
     <rosparam command="load" file="$(find haruna)/config/canopen/bus.yaml"/>

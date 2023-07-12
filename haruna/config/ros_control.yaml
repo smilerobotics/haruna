@@ -5,10 +5,10 @@ joint_state_controller:
 
 left_wheel_motor_velocity_controller:
   type: velocity_controllers/JointVelocityController
-  joint: left_wheel_joint
+  joint: left_leg_to_left_wheel_joint
   required_drive_mode: 3
 
 right_wheel_motor_velocity_controller:
   type: velocity_controllers/JointVelocityController
-  joint: right_wheel_joint
+  joint: right_leg_to_right_wheel_joint
   required_drive_mode: 3
