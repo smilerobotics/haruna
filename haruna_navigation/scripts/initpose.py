@@ -51,7 +51,7 @@ if __name__ == '__main__':
 
     while not rospy.is_shutdown():
         try: 
-            trans_aruco_to_odom = tfBuffer.lookup_transform('odom', 'aruco_marker_frame', rospy.Time.now(), rospy.Duration(1.0))
+            trans_aruco_to_odom = tfBuffer.lookup_transform('base_link', 'aruco_marker_frame', rospy.Time.now(), rospy.Duration(1.0))
         except (
             tf2_ros.LookupException,
             tf2_ros.ConnectivityException,
