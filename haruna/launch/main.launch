@@ -3,7 +3,7 @@
   <arg name="motor_driver" default="zlac8015"/>
   <!-- LiDAR, laser scan -->
   <arg name="lidar" default="rplidar"/>
-  <arg name="lidar_port" default="/dev/tty/USB0"/>
+  <arg name="lidar_port" default="/dev/ttyUSB0"/>
   <arg name="laser_filter_file" default="$(find haruna_navigation)/config/laser_filter/$(arg lidar).yaml" />
   <arg name="vel_limit_linear" default="inf"/>
   <arg name="vel_limit_angular" default="inf"/>
