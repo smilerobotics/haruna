@@ -78,7 +78,6 @@ class BaseController:
 
 class Odom:
     def __init__(self):
-        self._tf_broadcaster = tf2_ros.TransformBroadcaster()
         self._odom_publisher = rospy.Publisher('/haruna_base_odometry/odom', Odometry, queue_size=1)
         self._frame_id = 'odom'
         self._child_frame_id = 'base_link'
@@ -107,19 +106,7 @@ class Odom:
         self._pos_x += self._vel_linear * math.cos(self._orientation_yaw) * dt
         self._pos_y += self._vel_linear * math.sin(self._orientation_yaw) * dt
 
-        self._send_transform()
         self._send_odom()
-
-    def _send_transform(self):
-        tf = TransformStamped()
-        tf.header.frame_id = self._frame_id
-        tf.header.stamp = rospy.Time.now()
-        tf.child_frame_id = self._child_frame_id
-        tf.transform.translation.x = self._pos_x
-        tf.transform.translation.y = self._pos_y
-        tf.transform.rotation.z = math.sin(self._orientation_yaw / 2)
-        tf.transform.rotation.w = math.cos(self._orientation_yaw / 2)
-        self._tf_broadcaster.sendTransform(tf)
 
     def _send_odom(self):
         odom_quat = quaternion_from_euler(0.0, 0.0, self._orientation_yaw)
