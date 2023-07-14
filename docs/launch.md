@@ -19,16 +19,18 @@
 | [mapping.launch](../haruna_navigation/launch/mapping.launch)           | Manual mapping. Control the robot using JoyStick |
 | [mapping_rviz.launch](../haruna_navigation/launch/mapping_rviz.launch) | Visualize created map in `RViz`                  |
 
-## For navigation
-
-| File name                                                                    | Purpose                                                         |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| [navigation.launch](../haruna_navigation/launch/navigation.launch)           | Run the robot in Navigation mode                                |
-| [navigation_rviz.launch](../haruna_navigation/launch/navigation_rviz.launch) | Visualize map, path, robot model or else and set goal in `RViz` |
-
 ## For auto mapping
 
 | File name                                                                        | Purpose                                                                                     |
 | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | [mapping_auto.launch](../haruna_navigation/launch/mapping_auto.launch)           | Auto mapping and autonomous                                                                 |
 | [mapping_auto_rviz.launch](../haruna_navigation/launch/mapping_auto_rviz.launch) | [navigation_rviz.launch](../haruna_navigation/launch/navigation_rviz.launch) + auto mapping |
+
+## For navigation
+
+| File name                                                                    | Purpose                                                         |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [navigation.launch](../haruna_navigation/launch/navigation.launch)           | Run the robot in Navigation mode                                |
+| [navigation_rviz.launch](../haruna_navigation/launch/navigation_rviz.launch) | Visualize map, path, robot model or else and set goal in `RViz` |
+| [detect_aruco.launch](../haruna_navigation/launch/detect_aruco.launch) | Detect ArUco marker and initialize robot's position.
+
