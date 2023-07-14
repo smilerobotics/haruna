@@ -15,6 +15,10 @@ Prepare either of the following
 * [2-CH CAN HAT (Waveshare)](./docs/can_hat.md)
 * etc
 
+### Camera
+
+Realsense D435 or D435i
+
 ### Joy Controller
 
 DualSense or something
@@ -74,6 +78,26 @@ roslaunch haruna_navigation mapping_auto.launch
 ```bash
 roslaunch haruna_navigation mapping_auto_rviz.launch
 ```
+
+## Navigation
+
+```bash
+roslaunch haruna_navigation navigation.launch
+```
+
+Use arg `map` to set the map file.
+
+### Initialize Pose with ArUco marker
+
+Before using this feature, you need to confirm the robot is running either real or sim and navigation is also running.
+And set the tf named `aruco_init_frame` that looked up from `map`.
+In the launch file below, that frame is defined by `static_transform_publisher`.
+
+```bash
+roslaunch haruna_navigation detect_aruco.launch
+```
+
+Use arg `markerId` and `markerSize` to set the marker's info.
 
 ## Launch files
 
