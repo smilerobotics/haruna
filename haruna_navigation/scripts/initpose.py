@@ -38,7 +38,7 @@ def homogeneous_to_transform(Mat):
 def transform_dot(tf1: Transform, tf2: Transform):
     tf1M = transform_to_homogeneous_matrix(tf1)
     tf2M = transform_to_homogeneous_matrix(tf2)
-    return  homogeneous_to_transform(tf1M.dot(tf2M))
+    return  homogeneous_to_transform(tf2M.dot(tf1M))
 
 
 if __name__ == '__main__':
@@ -51,7 +51,7 @@ if __name__ == '__main__':
 
     while not rospy.is_shutdown():
         try: 
-            trans_aruco_to_odom = tfBuffer.lookup_transform('base_link', 'aruco_marker_frame', rospy.Time.now(), rospy.Duration(1.0))
+            trans_aruco_to_base = tfBuffer.lookup_transform('base_link', 'aruco_marker_frame', rospy.Time.now(), rospy.Duration(1.0))
         except (
             tf2_ros.LookupException,
             tf2_ros.ConnectivityException,
@@ -73,7 +73,7 @@ if __name__ == '__main__':
         initial_pose.header.stamp = rospy.Time.now()
         initial_pose.header.frame_id = 'map'
 
-        initial_trans = transform_dot(trans_aruco_init.transform, trans_aruco_to_odom.transform)
+        initial_trans = transform_dot(trans_aruco_init.transform, trans_aruco_to_base.transform)
 
         initial_pose.pose.pose.position.x = initial_trans.translation.x
         initial_pose.pose.pose.position.y = initial_trans.translation.y

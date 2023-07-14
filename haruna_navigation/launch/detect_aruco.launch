@@ -21,7 +21,7 @@
     </node>
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="camera_static_transform" args="0.2 0.0 0.17 0.0 -0.78 0.0 base_link camera_link"/>
-    <node pkg="tf2_ros" type="static_transform_publisher" name="aruco_static_transform" args="0.0 0.0 0.0 0.0 0.0 0.0 map aruco_init_frame"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="aruco_static_transform" args="-0.5 1.0 0.75 1.57 0.0 1.57 map aruco_init_frame"/>
 
     <node name="aruco_initializer" pkg="haruna_navigation" type="initpose.py" output="screen"/>
 </launch>
