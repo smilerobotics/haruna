@@ -7,7 +7,7 @@
   <arg name="vel_limit_angular" default="inf"/>
   <arg name="acc_limit_linear" default="2.0"/>
   <arg name="acc_limit_angular" default="4.0"/>
-  <arg name="laser_filter_file" default="$(find haruna_navigation)/config/laser_filter.yaml" />
+  <arg name="laser_filter_file" default="$(find haruna_navigation)/config/laser_filter/$(arg lidar).yaml" />
 
   <include file="$(dirname)/ros_canopen.launch">
     <arg name="motor_driver" value="$(arg motor_driver)"/>
