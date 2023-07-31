@@ -13,4 +13,5 @@
   <exec_depend>rplidar_ros</exec_depend>
   <exec_depend>slam_toolbox</exec_depend>
   <exec_depend>teb_local_planner</exec_depend>
+  <exec_depend>robot_localization</exec_depend>
 </package>
