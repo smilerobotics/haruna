@@ -103,7 +103,7 @@ class Odom:
     def proc(self, dt: float):
         self._orientation_yaw = -(self._dist_left + self._dist_right) * WHEEL_RADIUS / TREAD_WIDTH
         self._vel_linear = (self._vel_left - self._vel_right) / 2 * WHEEL_RADIUS
-        self._vel_angular = (self._vel_left + self._vel_right) * WHEEL_RADIUS / TREAD_WIDTH
+        self._vel_angular = -(self._vel_left + self._vel_right) * WHEEL_RADIUS / TREAD_WIDTH
         self._pos_x += self._vel_linear * math.cos(self._orientation_yaw) * dt
         self._pos_y += self._vel_linear * math.sin(self._orientation_yaw) * dt
 
