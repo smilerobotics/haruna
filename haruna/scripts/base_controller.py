@@ -122,18 +122,14 @@ class Odom:
         self._tf_broadcaster.sendTransform(tf)
 
     def _send_odom(self):
-        odom_quat = quaternion_from_euler(0.0, 0.0, self._orientation_yaw)
         odom = Odometry()
         odom.header.stamp = rospy.Time.now()
         odom.header.frame_id = self._frame_id
         odom.child_frame_id = self._child_frame_id
         odom.pose.pose.position.x = self._pos_x
         odom.pose.pose.position.y = self._pos_y
-        odom.pose.pose.position.z = 0.0
-        odom.pose.pose.orientation.x = odom_quat[0]
-        odom.pose.pose.orientation.y = odom_quat[1]
-        odom.pose.pose.orientation.z = odom_quat[2]
-        odom.pose.pose.orientation.w = odom_quat[3]
+        odom.pose.pose.orientation.z = math.sin(self._orientation_yaw / 2)
+        odom.pose.pose.orientation.w = math.cos(self._orientation_yaw / 2)
         odom.pose.covariance = [
             pow(0.00017, 2), 0.0, 0.0, 0.0, 0.0, 0.0,
             0.0, pow(0.00017, 2), 0.0, 0.0, 0.0, 0.0,
