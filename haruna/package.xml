@@ -14,4 +14,7 @@
   <exec_depend>teleop_twist_joy</exec_depend>
   <exec_depend>velocity_controllers</exec_depend>
   <exec_depend>xacro</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>rt_usb_9axisimu_driver</exec_depend>
+  <exec_depend>imu-tools</exec_depend>
 </package>
