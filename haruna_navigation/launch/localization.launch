@@ -1,8 +1,6 @@
 <launch>
     <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true" output="screen">
         <rosparam command="load" file="$(find haruna_navigation)/config/robot_localization.yaml" />
-        <param name="tf_prefix" value="haruna"/>
-        <remap from="/odometry/filtered" to="odom_combined" />
         <remap from="odom0" to="odom" />
         <remap from="imu0"  to="imu/data" />
       </node>
