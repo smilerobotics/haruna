@@ -1,8 +1,18 @@
 <launch>
   <arg name="map" default="$(dirname)/../maps/map.yaml"/>
 
-  <!-- MoveBase -->
-  <include file="$(dirname)/move_base.launch"/>
+  <!-- Map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map)">
+    <param name="frame_id" value="map"/>
+  </node>
+
+  <!-- Robot Localization -->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true" output="screen">
+    <rosparam command="load" file="$(find haruna_navigation)/config/robot_localization.yaml" />
+    <remap from="/odometry/filtered" to="odom_filtered" />
+    <remap from="odom0" to="odom" />
+    <remap from="imu0"  to="imu/data" />
+  </node>
 
   <!-- AMCL -->
   <node pkg="amcl" type="amcl" name="amcl" clear_params="true">
@@ -10,8 +20,6 @@
     <remap from="scan" to="scan_filtered"/>
   </node>
 
-  <!-- Map server -->
-  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map)">
-    <param name="frame_id" value="map"/>
-  </node>
+  <!-- MoveBase -->
+  <include file="$(dirname)/move_base.launch"/>
 </launch>

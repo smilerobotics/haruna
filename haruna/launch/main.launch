@@ -30,5 +30,10 @@
     <rosparam command="load" file="$(arg laser_filter_file)" />
   </node>
 
+  <!-- IMU -->
+  <include file="$(find rt_usb_9axisimu_driver)/launch/rt_usb_9axisimu_driver.launch" />
+  <node pkg="imu_complementary_filter" type="complementary_filter_node" name="imu_filter" />
+
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+  <node name="imu_link_publisher" pkg="tf2_ros" type="static_transform_publisher" args="0.2 0.0 0.17 0.0 0.0 0.0 base_link imu_link"/>
 </launch>

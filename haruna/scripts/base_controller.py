@@ -79,7 +79,7 @@ class BaseController:
 class Odom:
     def __init__(self):
         self._tf_broadcaster = tf2_ros.TransformBroadcaster()
-        self._odom_publisher = rospy.Publisher('/haruna_base_odometry/odom', Odometry, queue_size=1)
+        self._odom_publisher = rospy.Publisher('/odom', Odometry, queue_size=1)
         self._frame_id = 'odom'
         self._child_frame_id = 'base_link'
 
