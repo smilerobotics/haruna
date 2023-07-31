@@ -3,8 +3,10 @@
 import math
 import rospy
 import tf2_ros
+from tf.transformations import quaternion_from_euler
 from geometry_msgs.msg import TransformStamped
 from geometry_msgs.msg import Twist
+from nav_msgs.msg import Odometry
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64
 
@@ -65,8 +67,8 @@ class BaseController:
         vel_linear = clamp(vel_linear, self._last_vel_linear - self._lim_acc_linear * dt, self._last_vel_linear + self._lim_acc_linear * dt)
         vel_angular = clamp(vel_angular, self._last_vel_angular - self._lim_acc_angular * dt, self._last_vel_angular + self._lim_acc_angular * dt)
 
-        vel_left = vel_linear - vel_angular * TREAD_WIDTH / 2;
-        vel_right = vel_linear + vel_angular * TREAD_WIDTH / 2;
+        vel_left = vel_linear - vel_angular * TREAD_WIDTH / 2
+        vel_right = vel_linear + vel_angular * TREAD_WIDTH / 2
         self._left_wheel_motor_velocity_publisher.publish(Float64(vel_left / WHEEL_RADIUS))
         self._right_wheel_motor_velocity_publisher.publish(Float64(-vel_right / WHEEL_RADIUS))
 
@@ -74,16 +76,19 @@ class BaseController:
         self._last_vel_angular = vel_angular
 
 
-class Odometry:
+class Odom:
     def __init__(self):
         self._tf_broadcaster = tf2_ros.TransformBroadcaster()
-        self._tf_frame_id = 'odom'
-        self._tf_child_frame_id = 'base_link'
+        self._odom_publisher = rospy.Publisher('/odom', Odometry, queue_size=1)
+        self._frame_id = 'odom'
+        self._child_frame_id = 'base_link'
 
         self._dist_left = 0.0
         self._dist_right = 0.0
         self._vel_left = 0.0
         self._vel_right = 0.0
+        self._vel_linear = 0.0
+        self._vel_angular = 0.0
 
         self._pos_x = 0.0
         self._pos_y = 0.0
@@ -97,22 +102,55 @@ class Odometry:
 
     def proc(self, dt: float):
         self._orientation_yaw = -(self._dist_left + self._dist_right) * WHEEL_RADIUS / TREAD_WIDTH
-        vel_linear = (self._vel_left - self._vel_right) / 2 * WHEEL_RADIUS
-        self._pos_x += vel_linear * math.cos(self._orientation_yaw) * dt
-        self._pos_y += vel_linear * math.sin(self._orientation_yaw) * dt
+        self._vel_linear = (self._vel_left - self._vel_right) / 2 * WHEEL_RADIUS
+        self._vel_angular = -(self._vel_left + self._vel_right) * WHEEL_RADIUS / TREAD_WIDTH
+        self._pos_x += self._vel_linear * math.cos(self._orientation_yaw) * dt
+        self._pos_y += self._vel_linear * math.sin(self._orientation_yaw) * dt
 
         self._send_transform()
-
+        self._send_odom()
+    
     def _send_transform(self):
         tf = TransformStamped()
-        tf.header.frame_id = self._tf_frame_id
+        tf.header.frame_id = self._frame_id
         tf.header.stamp = rospy.Time.now()
-        tf.child_frame_id = self._tf_child_frame_id
+        tf.child_frame_id = 'hoge_link'
         tf.transform.translation.x = self._pos_x
         tf.transform.translation.y = self._pos_y
         tf.transform.rotation.z = math.sin(self._orientation_yaw / 2)
         tf.transform.rotation.w = math.cos(self._orientation_yaw / 2)
         self._tf_broadcaster.sendTransform(tf)
+
+    def _send_odom(self):
+        odom = Odometry()
+        odom.header.stamp = rospy.Time.now()
+        odom.header.frame_id = self._frame_id
+        odom.child_frame_id = self._child_frame_id
+        odom.pose.pose.position.x = self._pos_x
+        odom.pose.pose.position.y = self._pos_y
+        odom.pose.pose.orientation.z = math.sin(self._orientation_yaw / 2)
+        odom.pose.pose.orientation.w = math.cos(self._orientation_yaw / 2)
+        odom.pose.covariance = [
+            pow(0.00017, 2), 0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, pow(0.00017, 2), 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, pow(0.00017, 2), 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 1000000.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 1000000.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0, 1000.0
+        ]
+        odom.twist.twist.linear.x = self._vel_linear * math.cos(self._orientation_yaw)
+        odom.twist.twist.linear.y = self._vel_linear * math.sin(self._orientation_yaw)
+        odom.twist.twist.angular.z = self._vel_angular
+        odom.twist.covariance = [
+            pow(0.00017, 2), 0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, pow(0.00017, 2), 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, pow(0.00017, 2), 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, pow(0.00017, 2), 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, pow(0.00017, 2), 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0, 0.001,
+        ]
+        self._odom_publisher.publish(odom)
+
 
 def clamp(n, smallest, largest):
         return max(smallest, min(n, largest))
@@ -129,7 +167,7 @@ if __name__ == '__main__':
     lim_acc_angular = float(rospy.get_param(PARAM_NAME_ACC_LIMIT_ANGULAR, DEFAULT_ACC_LIMIT_ANGULAR))
 
     base = BaseController(lim_vel_linear, lim_vel_angular, lim_acc_linear, lim_acc_angular)
-    odom = Odometry()
+    odom = Odom()
 
     cmd_vel_subscriber = rospy.Subscriber(
         TOPIC_NAME_CMD_VEL, Twist,
