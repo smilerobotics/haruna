@@ -1583,7 +1583,7 @@ DataType=0x0006
 AccessType=rw
 HighLimit=30000
 LowLimit=0
-DefaultValue=500
+;DefaultValue=500
 PDOMapping=1
 
 [201E]
@@ -1594,7 +1594,7 @@ DataType=0x0006
 AccessType=rw
 HighLimit=30000
 LowLimit=0
-DefaultValue=100
+;DefaultValue=100
 PDOMapping=1
 
 [201F]
@@ -1605,7 +1605,7 @@ DataType=0x0006
 AccessType=rw
 HighLimit=30000
 LowLimit=0
-DefaultValue=1000
+;DefaultValue=1000
 PDOMapping=1
 
 [2020]
