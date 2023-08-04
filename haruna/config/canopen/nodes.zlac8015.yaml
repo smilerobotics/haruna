@@ -61,9 +61,9 @@ defaults:
     #"2008": "1" # Initial speed
     #"2019": "600" # Current loop propotional coefficient (dafault: 600)
     #"201A": "300" # Current loop Integral gain (dafault: 300)
-    #"201D": "500" # Speed proportional gain Kp (dafault: 500)
-    #"201E": "100" # Speed integral gain Ki (dafault: 100)
-    #"201F": "1000" # Speed feedforward gain Kf (dafault: 1000)
+    "201D": "500" # Speed proportional gain Kp (dafault: 500)
+    "201E": "100" # Speed integral gain Ki (dafault: 100)
+    "201F": "1000" # Speed feedforward gain Kf (dafault: 1000)
     "6083": "5" # S-shaped acceleration time (dafault: 500[ms])
     "6084": "5" # S-shaped deceleration time (dafault: 500[ms])
     #"6087": "300" # Torque slope (dafault: 300[ms])
