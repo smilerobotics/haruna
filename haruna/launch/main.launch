@@ -3,6 +3,7 @@
   <arg name="motor_driver" default="zlac8015"/>
   <!-- LiDAR, laser scan -->
   <arg name="lidar" default="rplidar"/>
+  <arg name="lidar_path" default="/dev/$(arg lidar)"/>
   <arg name="vel_limit_linear" default="inf"/>
   <arg name="vel_limit_angular" default="inf"/>
   <arg name="acc_limit_linear" default="2.0"/>
@@ -23,7 +24,15 @@
   </node>
 
   <!-- RPLiDAR -->
-  <include file="$(find rplidar_ros)/launch/rplidar_s1.launch"/>
+  <group if="$(eval lidar == 'rplidar')">
+    <node name="rplidarNode" pkg="rplidar_ros" type="rplidarNode" output="screen">
+      <param name="serial_port" type="string" value="$(arg lidar_path)"/>
+      <param name="serial_baudrate" type="int" value="256000"/>
+      <param name="frame_id" type="string" value="laser"/>
+      <param name="inverted" type="bool" value="false"/>
+      <param name="angle_compensate" type="bool" value="true"/>
+    </node>
+  </group>
 
   <!-- Laser filter -->
   <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
