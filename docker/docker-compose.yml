@@ -1,10 +1,18 @@
 services:
 
   haruna:
-    build: .
+    build: 
+      context: ..
+      dockerfile: docker/Dockerfile
     image: haruna:latest
     container_name: haruna
     privileged: true
     network_mode: "host"
     tty: true
-    stdin_open: true
+    environment:
+      - ROS_MASTER_URI
+      - ROS_IP
+    volumes:
+      - "/dev:/dev"
+    command: roslaunch haruna main.launch
+

@@ -17,26 +17,9 @@ cd {HARUNA_DIRECTORY}/docker
 docker compose build
 ```
 
-Create a docker container and start it in background:
+Create a docker container and start it, then the main nodes of Haruna will be launched:
 
 ```bash
-docker compose up -d
+docker compose up
 ```
 
-## Launch haruna
-
-Attach to the docker container created by docker-compose:
-
-```bash
-docker compose exec haruna /bin/bash
-```
-
-Set up haruna:
-
-```bash
-source /root/catkin_ws/install/setup.bash
-```
-
-Then you can use `roslaunch` command to launch haruna.
-
-The description of the launch files is [here](../docs/launch.md).
